@@ -396,8 +396,130 @@
 
     <!-- 소모품 상세 관리 페이지 -->
     <div id="detailPage" class="fixed inset-0 bg-[#F5F7FA] hidden">
-        <!-- 사이드바 오버레이 -->
-        <div class="fixed left-0 top-0 bottom-0 w-[200px] bg-[#2B2D33] z-10"></div>
+        <!-- 사이드바 -->
+        <aside class="w-[200px] bg-[#2B2D33] text-white flex flex-col fixed h-screen z-10">
+            <!-- 로고 -->
+            <div class="h-[70px] bg-[#00C896] flex items-center justify-center cursor-pointer">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-white rounded flex items-center justify-center">
+                        <span class="text-[#00C896] font-bold text-xl">S</span>
+                    </div>
+                    <span class="text-white font-bold text-lg">SOLink</span>
+                </div>
+            </div>
+
+            <!-- 메뉴 영역 -->
+            <nav class="flex-1 sidebar-scroll py-4">
+                <div class="px-3 space-y-1">
+                    <!-- 메뉴 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>📋</span>
+                            <span>매뉴 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- 권한 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>🔐</span>
+                            <span>권한 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- 데이터 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>📊</span>
+                            <span>데이터 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- 사이트 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>🏢</span>
+                            <span>사이트 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- 지도 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>🗺️</span>
+                            <span>지도 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- 회원 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>👥</span>
+                            <span>회원 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- 로봇 관리 - 활성 -->
+                    <div class="bg-[#26C6DA] px-4 py-3 rounded cursor-pointer text-sm">
+                        <div class="flex items-center space-x-3">
+                            <span>🤖</span>
+                            <span>로봇 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- POI 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>📍</span>
+                            <span>POI 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- 알림 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>🔔</span>
+                            <span>알림 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- AoD 관리 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>📱</span>
+                            <span>AoD 관리</span>
+                        </div>
+                    </div>
+
+                    <!-- 문의 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>❓</span>
+                            <span>문의</span>
+                        </div>
+                    </div>
+
+                    <!-- 도움말 -->
+                    <div class="menu-item px-4 py-3 rounded cursor-pointer flex items-center justify-between text-sm text-[#A0A3A8]">
+                        <div class="flex items-center space-x-3">
+                            <span>📖</span>
+                            <span>도움말</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- 로그아웃 버튼 & 버전 정보 -->
+            <div class="p-4 space-y-2">
+                <button class="w-full bg-[#26C6DA] hover:bg-[#21B1C4] text-white py-3 rounded font-medium transition-colors">
+                    로그아웃
+                </button>
+                <div class="text-center text-xs text-[#6C757D]">
+                    Version 3.0<br>
+                    © Bigwave Robotics Inc. All Rights Reserved.
+                </div>
+            </div>
+        </aside>
         
         <!-- 상단 헤더 -->
         <header class="relative ml-[200px] bg-white border-b border-gray-200 h-[70px] flex items-center justify-between px-8 z-20">
@@ -466,6 +588,8 @@
                                 <th class="px-4 py-3 text-left text-sm font-semibold text-[#495057] border-b-2 border-[#DEE2E6]">교체 일자</th>
                                 <th class="px-4 py-3 text-right text-sm font-semibold text-[#495057] border-b-2 border-[#DEE2E6]">잔량 (%)</th>
                                 <th class="px-4 py-3 text-right text-sm font-semibold text-[#495057] border-b-2 border-[#DEE2E6]">평균 소모율 (%)</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-[#495057] border-b-2 border-[#DEE2E6]">잔량 변경 사유</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-[#495057] border-b-2 border-[#DEE2E6]">수정 회원</th>
                             </tr>
                         </thead>
                         <tbody id="historyTableBody">
@@ -510,6 +634,17 @@
     </div>
 
     <script>
+        // 소모품별 기본 평균 소모율
+        const defaultAvgConsumption = {
+            'brush-main': 0.0020,
+            'brush-side': 0.0015,
+            'brush-standard': 0.0018,
+            'filter-hepa': 0.0025,
+            'filter-dust': 0.0010,
+            'filter-standard': 0.0015,
+            'mop-pad': 0.0008
+        };
+
         // 소모품 데이터 (모델별 소모품 유형)
         const consumablesByModel = {
             'Clean-X Pro': [
@@ -538,7 +673,7 @@
                 'brush-side': { enabled: true, lastReplaced: '2024-09-01', remaining: 8, avgConsumption: 0.0008, status: 'replace' },
                 'filter-hepa': { enabled: true, lastReplaced: '2024-07-20', remaining: 2, avgConsumption: 0.0002, status: 'replace' },
                 'filter-dust': { enabled: true, lastReplaced: '2024-10-01', remaining: 65, avgConsumption: 0.0012, status: 'normal' },
-                'mop-pad': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null }
+                'mop-pad': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['mop-pad'], status: null }
             },
             'warning': {
                 'brush-main': { enabled: true, lastReplaced: '2024-09-10', remaining: 8, avgConsumption: 0.0023, status: 'warning' },
@@ -555,30 +690,30 @@
                 'mop-pad': { enabled: true, lastReplaced: '2024-10-10', remaining: 95, avgConsumption: 0.0005, status: 'normal' }
             },
             'none': {
-                'brush-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'filter-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null }
+                'brush-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['brush-standard'], status: null },
+                'filter-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['filter-standard'], status: null }
             },
             'mixed': {
                 'brush-main': { enabled: true, lastReplaced: '2024-10-01', remaining: 75, avgConsumption: 0.0020, status: 'normal' },
                 'brush-side': { enabled: true, lastReplaced: '2024-10-01', remaining: 80, avgConsumption: 0.0015, status: 'normal' },
-                'filter-hepa': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'filter-dust': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'mop-pad': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null }
+                'filter-hepa': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['filter-hepa'], status: null },
+                'filter-dust': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['filter-dust'], status: null },
+                'mop-pad': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['mop-pad'], status: null }
             },
             'mixed-y': {
                 'brush-main': { enabled: true, lastReplaced: '2024-10-01', remaining: 75, avgConsumption: 0.0020, status: 'normal' },
                 'brush-side': { enabled: true, lastReplaced: '2024-10-01', remaining: 80, avgConsumption: 0.0015, status: 'normal' },
-                'filter-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'mop-pad': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null }
+                'filter-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['filter-standard'], status: null },
+                'mop-pad': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['mop-pad'], status: null }
             },
             'unset': {
-                'brush-main': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'brush-side': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'filter-hepa': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'filter-dust': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'mop-pad': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'brush-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null },
-                'filter-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: null, status: null }
+                'brush-main': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['brush-main'], status: null },
+                'brush-side': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['brush-side'], status: null },
+                'filter-hepa': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['filter-hepa'], status: null },
+                'filter-dust': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['filter-dust'], status: null },
+                'mop-pad': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['mop-pad'], status: null },
+                'brush-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['brush-standard'], status: null },
+                'filter-standard': { enabled: false, lastReplaced: null, remaining: null, avgConsumption: defaultAvgConsumption['filter-standard'], status: null }
             }
         };
 
@@ -644,10 +779,10 @@
                 initialValues[item.typeId] = {
                     lastReplaced: state.lastReplaced || '',
                     remaining: state.remaining || '',
-                    avgConsumption: state.avgConsumption || ''
+                    avgConsumption: state.avgConsumption !== null ? state.avgConsumption : (defaultAvgConsumption[item.typeId] || '')
                 };
                 
-                // 설정 여부 판단
+                // 설정 여부 판단 (평균 소모율은 기본값이 있으므로 null이 아니면 설정된 것으로 간주)
                 const isConfigured = state.lastReplaced !== null && state.remaining !== null && state.avgConsumption !== null;
                 
                 return `
@@ -667,7 +802,7 @@
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusClass(state.status)}">
                                             ${getStatusText(state.status)}
                                         </span>
-                                        ${state.remaining !== null ? `<span class="text-sm text-[#6C757D]">잔량: ${state.remaining}%</span>` : ''}
+                                        ${state.remaining !== null ? `<span class="text-sm text-[#6C757D]">잔량: ${state.remaining}% (${state.changeReason || '사용자 직접 수정'})</span>` : ''}
                                     </div>
                                     <div class="mt-2 text-xs text-[#6C757D]">
                                         잔량 마지막 갱신 일시: ${getCurrentDateTime()}
@@ -715,7 +850,7 @@
                                         id="avgConsumption-${item.typeId}"
                                         data-type="${item.typeId}" 
                                         data-field="avgConsumption"
-                                        value="${state.avgConsumption !== null ? state.avgConsumption : ''}" 
+                                        value="${state.avgConsumption !== null ? state.avgConsumption : defaultAvgConsumption[item.typeId] || ''}" 
                                         placeholder="예: 0.0015" 
                                         class="w-full h-10 px-3 border border-[#CED4DA] rounded focus:outline-none focus:border-[#26C6DA] text-sm"
                                     >
@@ -910,7 +1045,8 @@
                     lastReplaced: lastReplaced,
                     remaining: parseFloat(remaining),
                     avgConsumption: parseFloat(avgConsumption),
-                    status: newStatus
+                    status: newStatus,
+                    changeReason: '사용자 직접 수정'
                 };
                 
                 // UI 업데이트 - 해당 소모품 카드만 재렌더링
@@ -918,7 +1054,8 @@
                     lastReplaced: lastReplaced,
                     remaining: remaining,
                     avgConsumption: avgConsumption,
-                    status: newStatus
+                    status: newStatus,
+                    changeReason: '사용자 직접 수정'
                 });
                 
                 // 저장 버튼 다시 활성화
@@ -946,7 +1083,7 @@
                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusClass(data.status)}">
                             ${getStatusText(data.status)}
                         </span>
-                        <span class="text-sm text-[#6C757D]">잔량: ${data.remaining}%</span>
+                        <span class="text-sm text-[#6C757D]">잔량: ${data.remaining}% (${data.changeReason || '사용자 직접 수정'})</span>
                     </div>
                     <div class="mt-2 text-xs text-[#6C757D]">
                         잔량 마지막 갱신 일시: ${getCurrentDateTime()}
@@ -1023,7 +1160,10 @@
         // 페이지 변경
         function changeHistoryPage(page) {
             if (page < 1) return;
-            const consumableName = document.getElementById('historyModalSubtitle').textContent.split(' - ')[0];
+            const subtitleEl = document.getElementById('historyModalSubtitle');
+            const lines = subtitleEl.textContent.split('\n');
+            const consumableLine = lines.find(line => line.includes('소모품:'));
+            const consumableName = consumableLine ? consumableLine.replace('소모품:', '').trim() : '';
             const typeId = findTypeIdByConsumableName(consumableName);
             currentHistoryPage = page;
             loadHistoryPage(consumableName, typeId);
@@ -1046,42 +1186,42 @@
             // 소모품별 샘플 이력 데이터 (최대 15개)
             const historyDataByType = {
                 'brush-main': [
-                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-10-01', remaining: 75, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-14 14:30:00', replacedDate: '2024-10-01', remaining: 76, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-13 14:30:00', replacedDate: '2024-10-01', remaining: 77, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-12 14:30:00', replacedDate: '2024-10-01', remaining: 78, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-11 14:30:00', replacedDate: '2024-10-01', remaining: 79, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-10 10:15:00', replacedDate: '2024-10-01', remaining: 85, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-09 10:15:00', replacedDate: '2024-10-01', remaining: 86, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-08 10:15:00', replacedDate: '2024-10-01', remaining: 87, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-07 10:15:00', replacedDate: '2024-10-01', remaining: 88, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-06 10:15:00', replacedDate: '2024-10-01', remaining: 89, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-05 09:00:00', replacedDate: '2024-10-01', remaining: 95, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-04 09:00:00', replacedDate: '2024-10-01', remaining: 96, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-03 09:00:00', replacedDate: '2024-10-01', remaining: 97, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-02 09:00:00', replacedDate: '2024-10-01', remaining: 98, avgConsumption: 0.0020 },
-                    { recordedAt: '2024-10-01 14:00:00', replacedDate: '2024-10-01', remaining: 100, avgConsumption: 0.0020 }
+                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-10-01', remaining: 75, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-14 14:30:00', replacedDate: '2024-10-01', remaining: 76, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-13 14:30:00', replacedDate: '2024-10-01', remaining: 77, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-12 14:30:00', replacedDate: '2024-10-01', remaining: 78, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-11 14:30:00', replacedDate: '2024-10-01', remaining: 79, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-10 10:15:00', replacedDate: '2024-10-01', remaining: 85, avgConsumption: 0.0020, changeReason: '사용자 직접 수정', modifiedBy: 'admin@solink.com' },
+                    { recordedAt: '2024-10-09 10:15:00', replacedDate: '2024-10-01', remaining: 86, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-08 10:15:00', replacedDate: '2024-10-01', remaining: 87, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-07 10:15:00', replacedDate: '2024-10-01', remaining: 88, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-06 10:15:00', replacedDate: '2024-10-01', remaining: 89, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-05 09:00:00', replacedDate: '2024-10-01', remaining: 95, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-04 09:00:00', replacedDate: '2024-10-01', remaining: 96, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-03 09:00:00', replacedDate: '2024-10-01', remaining: 97, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-02 09:00:00', replacedDate: '2024-10-01', remaining: 98, avgConsumption: 0.0020, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-01 14:00:00', replacedDate: '2024-10-01', remaining: 100, avgConsumption: 0.0020, changeReason: '사용자 직접 수정', modifiedBy: 'admin@solink.com' }
                 ],
                 'brush-side': [
-                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-09-10', remaining: 82, avgConsumption: 0.0018 },
-                    { recordedAt: '2024-10-10 10:15:00', replacedDate: '2024-09-10', remaining: 87, avgConsumption: 0.0018 },
-                    { recordedAt: '2024-10-05 09:00:00', replacedDate: '2024-09-10', remaining: 92, avgConsumption: 0.0018 },
-                    { recordedAt: '2024-09-10 14:00:00', replacedDate: '2024-09-10', remaining: 100, avgConsumption: 0.0018 }
+                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-09-10', remaining: 82, avgConsumption: 0.0018, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-10 10:15:00', replacedDate: '2024-09-10', remaining: 87, avgConsumption: 0.0018, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-05 09:00:00', replacedDate: '2024-09-10', remaining: 92, avgConsumption: 0.0018, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-09-10 14:00:00', replacedDate: '2024-09-10', remaining: 100, avgConsumption: 0.0018, changeReason: '사용자 직접 수정', modifiedBy: 'admin@solink.com' }
                 ],
                 'filter-hepa': [
-                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-09-20', remaining: 88, avgConsumption: 0.0025 },
-                    { recordedAt: '2024-10-10 10:15:00', replacedDate: '2024-09-20', remaining: 90, avgConsumption: 0.0025 },
-                    { recordedAt: '2024-10-05 09:00:00', replacedDate: '2024-09-20', remaining: 92, avgConsumption: 0.0025 },
-                    { recordedAt: '2024-09-20 14:00:00', replacedDate: '2024-09-20', remaining: 100, avgConsumption: 0.0025 }
+                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-09-20', remaining: 88, avgConsumption: 0.0025, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-10 10:15:00', replacedDate: '2024-09-20', remaining: 90, avgConsumption: 0.0025, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-05 09:00:00', replacedDate: '2024-09-20', remaining: 92, avgConsumption: 0.0025, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-09-20 14:00:00', replacedDate: '2024-09-20', remaining: 100, avgConsumption: 0.0025, changeReason: '사용자 직접 수정', modifiedBy: 'admin@solink.com' }
                 ],
                 'filter-dust': [
-                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-10-05', remaining: 78, avgConsumption: 0.0010 },
-                    { recordedAt: '2024-10-10 10:15:00', replacedDate: '2024-10-05', remaining: 80, avgConsumption: 0.0010 },
-                    { recordedAt: '2024-10-05 14:00:00', replacedDate: '2024-10-05', remaining: 100, avgConsumption: 0.0010 }
+                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-10-05', remaining: 78, avgConsumption: 0.0010, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-10 10:15:00', replacedDate: '2024-10-05', remaining: 80, avgConsumption: 0.0010, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-05 14:00:00', replacedDate: '2024-10-05', remaining: 100, avgConsumption: 0.0010, changeReason: '사용자 직접 수정', modifiedBy: 'admin@solink.com' }
                 ],
                 'mop-pad': [
-                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-10-10', remaining: 85, avgConsumption: 0.0008 },
-                    { recordedAt: '2024-10-10 14:00:00', replacedDate: '2024-10-10', remaining: 100, avgConsumption: 0.0008 }
+                    { recordedAt: '2024-10-15 14:30:00', replacedDate: '2024-10-10', remaining: 85, avgConsumption: 0.0008, changeReason: '작업별 소모량 반영', modifiedBy: '-' },
+                    { recordedAt: '2024-10-10 14:00:00', replacedDate: '2024-10-10', remaining: 100, avgConsumption: 0.0008, changeReason: '사용자 직접 수정', modifiedBy: 'admin@solink.com' }
                 ],
                 'brush-standard': [],
                 'filter-standard': []
@@ -1092,20 +1232,37 @@
             const state = states[typeId] || {};
             const isConfigured = state.lastReplaced !== null && state.remaining !== null && state.avgConsumption !== null;
             
-            // 설정되지 않은 경우 빈 배열, 설정된 경우 이력 데이터 사용
-            const historyData = isConfigured ? (historyDataByType[typeId] || []) : [];
-            const totalRecords = historyData.length;
+            // 설정되지 않은 경우 빈 배열, 설정된 경우 이력 데이터 + 현재 상태를 최신으로 포함
+            const baseHistory = isConfigured ? (historyDataByType[typeId] || []) : [];
+            let combinedHistory = [...baseHistory];
+
+            if (isConfigured) {
+                const currentEntry = {
+                    recordedAt: getHistoryDateTime(),
+                    replacedDate: state.lastReplaced,
+                    remaining: state.remaining,
+                    avgConsumption: state.avgConsumption !== null ? state.avgConsumption : (defaultAvgConsumption[typeId] || 0),
+                    changeReason: state.changeReason || '사용자 직접 수정',
+                    modifiedBy: (state.changeReason && state.changeReason !== '사용자 직접 수정') ? '-' : 'admin@solink.com'
+                };
+                combinedHistory.unshift(currentEntry);
+            }
+
+            // 기록 일시 기준 최신순 정렬
+            combinedHistory.sort((a, b) => new Date(b.recordedAt) - new Date(a.recordedAt));
+
+            const totalRecords = combinedHistory.length;
             const itemsPerPage = 10; // 한 페이지당 10건
             const startIndex = (currentHistoryPage - 1) * itemsPerPage;
             const endIndex = totalRecords > 0 ? Math.min(startIndex + itemsPerPage, totalRecords) : 0;
-            const paginatedData = historyData.slice(startIndex, endIndex);
+            const paginatedData = combinedHistory.slice(startIndex, endIndex);
             const totalPages = Math.ceil(totalRecords / itemsPerPage);
 
             let historyHTML = '';
             if (totalRecords === 0) {
                 historyHTML = `
                     <tr>
-                        <td colspan="4" class="px-4 py-8 text-center text-sm text-[#6C757D]">
+                        <td colspan="6" class="px-4 py-8 text-center text-sm text-[#6C757D]">
                             아직 저장된 이력이 없습니다.
                         </td>
                     </tr>
@@ -1117,23 +1274,26 @@
                         <td class="px-4 py-3 text-sm text-[#1A1C20]">${item.replacedDate}</td>
                         <td class="px-4 py-3 text-sm text-[#1A1C20] text-right">${item.remaining}%</td>
                         <td class="px-4 py-3 text-sm text-[#1A1C20] text-right">${item.avgConsumption}%</td>
+                        <td class="px-4 py-3 text-sm text-[#1A1C20]">${item.changeReason}</td>
+                        <td class="px-4 py-3 text-sm text-[#1A1C20]">${item.modifiedBy}</td>
                     </tr>
                 `).join('');
             }
             
             document.getElementById('historyTableBody').innerHTML = historyHTML;
             
-            // 페이지네이션 정보 업데이트 (최대 10개 표시)
+            // 페이지네이션 정보 업데이트
             const paginationInfo = document.getElementById('paginationInfo');
             if (paginationInfo) {
                 const infoText = paginationInfo.querySelector('div');
                 if (infoText) {
-                    const displayCount = totalRecords > 0 ? Math.min(paginatedData.length, itemsPerPage) : 0;
-                    infoText.textContent = `총 ${totalRecords}건 중 ${totalRecords > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + displayCount, totalRecords)}건`;
+                    const startRecord = totalRecords > 0 ? startIndex + 1 : 0;
+                    const endRecord = totalRecords > 0 ? Math.min(startIndex + paginatedData.length, totalRecords) : 0;
+                    infoText.textContent = `총 ${totalRecords}건 중 ${startRecord}-${endRecord}건`;
                 }
             }
             
-            // 페이지네이션 버튼 생성 (10건 초과 시에만 2페이지 이상 표시)
+            // 페이지네이션 버튼 생성
             const paginationButtonsEl = document.getElementById('paginationButtons');
             if (paginationButtonsEl) {
                 let buttonsHTML = '';
@@ -1201,6 +1361,19 @@
                 minute: '2-digit', 
                 second: '2-digit' 
             });
+        }
+
+        // 이력용 날짜시간 (YYYY-MM-DD HH:mm:ss)
+        function getHistoryDateTime() {
+            const pad2 = (n) => String(n).padStart(2, '0');
+            const d = new Date();
+            const yyyy = d.getFullYear();
+            const MM = pad2(d.getMonth() + 1);
+            const dd = pad2(d.getDate());
+            const HH = pad2(d.getHours());
+            const mm = pad2(d.getMinutes());
+            const ss = pad2(d.getSeconds());
+            return `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`;
         }
 
 
