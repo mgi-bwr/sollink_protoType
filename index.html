@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>청소로봇 운영 성과 월간 리포트 - 2024년 11월</title>
+    <title>청소로봇 운영 성과 월간 리포트 - 2025년 11월</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -393,9 +393,8 @@
     <div class="container">
         <!-- 헤더 -->
         <div class="header">
-            <img src="images/logo_horizontal_all_w.png" alt="솔링크 로고" style="height: 32px; margin-bottom: 10px;">
             <h1>청소로봇 운영 성과 월간 리포트</h1>
-            <p class="subtitle">2024년 11월 운영 성과 분석 (2024.11.01 - 2024.11.30)</p>
+            <p class="subtitle">2025년 11월 운영 성과 분석 (2025.11.01 - 2025.11.30)</p>
             <p class="info-text">집계 사이트: 서울 본사 빌딩</p>
         </div>
 
@@ -574,7 +573,7 @@
                         </div>
                         
         <!-- 3. 로봇별 작업 성과 상세 -->
-        <div class="section">
+        <div class="section" id="robotDetailSection">
             <div class="section-header" style="display: flex; flex-direction: column; align-items: flex-start; gap: 15px;">
                 <span>로봇별 작업 성과 상세</span>
                 <div style="display: flex; align-items: center; gap: 10px;">
@@ -812,9 +811,8 @@
 
         <!-- 푸터 -->
         <div class="footer">
-            <p><img src="images/SOLlink_Horizontal.png" alt="솔링크" style="height: 45px; margin-bottom: 10px;"></p>
-            <p>본 리포트는 2024년 11월 청소로봇 운영 데이터를 기반으로 자동 생성되었습니다.</p>
-            <p>리포트 버전: v 1.0 | 발행일: 2024.12.01 오전 9시</p>
+            <p>본 리포트는 2025년 11월 청소로봇 운영 데이터를 기반으로 자동 생성되었습니다.</p>
+            <p>리포트 버전: v 1.0 | 발행일: 2025.12.01 오전 9시</p>
             <p>문의사항: support@solink.com</p>
             <p style="margin-top: 10px;">ⓒ2020-2025 Bigwave Robotics Inc. All Rights Reserved.</p>
         </div>
@@ -1030,8 +1028,8 @@
         // 일자별 작업 건수 패턴 차트
         const weeklyTaskCountCtx = document.getElementById('weeklyTaskCountChart').getContext('2d');
         
-        // 요일 계산 (2024년 11월 1일은 금요일)
-        const dayOfWeek = ['금', '토', '일', '월', '화', '수', '목'];
+        // 요일 계산 (2025년 11월 1일은 토요일)
+        const dayOfWeek = ['토', '일', '월', '화', '수', '목', '금'];
         const dateLabels = Array.from({length: 30}, (_, i) => {
             const day = i + 1;
             const dow = dayOfWeek[i % 7];
@@ -1347,8 +1345,8 @@
 
         // 일자별 청소 성과 차트 (청소로봇-A01 예시)
         const dailyCleaningCtx = document.getElementById('dailyCleaningChart').getContext('2d');
-        // 요일 포함 라벨 생성 (2024년 11월 1일은 금요일)
-        const dayOfWeekShort = ['금', '토', '일', '월', '화', '수', '목'];
+        // 요일 포함 라벨 생성 (2025년 11월 1일은 토요일)
+        const dayOfWeekShort = ['토', '일', '월', '화', '수', '목', '금'];
         const days = Array.from({length: 30}, (_, i) => {
             const day = i + 1;
             const dow = dayOfWeekShort[i % 7];
@@ -1356,7 +1354,7 @@
         });
         const dailyPlannedData = Array(30).fill(0).map(() => Math.floor(Math.random() * 20) + 90);
         const dailyRealData = dailyPlannedData.map(planned => Math.floor(Math.random() * (planned - 60)) + 60);
-        new Chart(dailyCleaningCtx, {
+        const dailyCleaningChart = new Chart(dailyCleaningCtx, {
             type: 'bar',
             data: {
                 labels: days,
@@ -1452,8 +1450,8 @@
             }
         });
 
-        // 작업별 상세 성과 데이터 (10개 작업)
-        const taskDetailData = [
+        // 작업별 상세 성과 데이터 (10개 작업) - 전역 변수로 관리
+        let taskDetailData = [
             { name: '전체 청소', count: 85, realArea: 95.5, planArea: 100.0, time: 58, efficiency: 98.8 },
             { name: '부분 청소', count: 42, realArea: 48.2, planArea: 50.0, time: 32, efficiency: 90.4 },
             { name: '스팟 청소', count: 18, realArea: 12.5, planArea: 15.0, time: 8, efficiency: 93.8 },
@@ -1482,7 +1480,7 @@
         
         // 파이차트 생성
         const taskPieCtx = document.getElementById('taskPieChart').getContext('2d');
-        new Chart(taskPieCtx, {
+        const taskPieChart = new Chart(taskPieCtx, {
             type: 'pie',
             data: {
                 labels: taskDetailData.map(t => t.name),
@@ -1528,10 +1526,10 @@
         // 테이블 페이지네이션
         let currentTaskPage = 1;
         const itemsPerPage = 5;
-        const totalPages = Math.ceil(taskDetailData.length / itemsPerPage);
         
         function renderTaskTable() {
             const tbody = document.getElementById('taskTableBody');
+            const totalPages = Math.ceil(taskDetailData.length / itemsPerPage);
             const start = (currentTaskPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const pageData = taskDetailData.slice(start, end);
@@ -1540,10 +1538,10 @@
                 <tr>
                     <td>${task.name}</td>
                     <td>${task.count}</td>
-                    <td>${task.realArea}</td>
-                    <td>${task.planArea}</td>
+                    <td>${task.realArea.toFixed(1)}</td>
+                    <td>${task.planArea.toFixed(1)}</td>
                     <td>${task.time}</td>
-                    <td>${task.efficiency}</td>
+                    <td>${task.efficiency.toFixed(1)}</td>
                 </tr>
             `).join('');
             
@@ -1559,6 +1557,7 @@
         }
         
         function changeTaskPage(direction) {
+            const totalPages = Math.ceil(taskDetailData.length / itemsPerPage);
             const newPage = currentTaskPage + direction;
             if (newPage >= 1 && newPage <= totalPages) {
                 currentTaskPage = newPage;
@@ -1570,20 +1569,20 @@
         renderTaskTable();
 
         // 일자별 작업 수행 분포 차트 (누적 막대)
-        const dailyTaskFullData = Array(30).fill(0).map(() => Math.floor(Math.random() * 5) + 2);
-        const dailyTaskPartData = Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 1);
-        const dailyTaskSpotData = Array(30).fill(0).map(() => Math.floor(Math.random() * 2));
-        const dailyTaskEmergencyData = Array(30).fill(0).map(() => Math.floor(Math.random() * 2));
-        const dailyTaskNightData = Array(30).fill(0).map(() => Math.floor(Math.random() * 1));
-        const dailyTaskTotalData = dailyTaskFullData.map((val, idx) => 
-            val + dailyTaskPartData[idx] + dailyTaskSpotData[idx] + dailyTaskEmergencyData[idx] + dailyTaskNightData[idx]
+        let dailyTaskTypeData = Array(30).fill(0).map(() => Math.floor(Math.random() * 5) + 2);
+        let dailyTaskPartialData = Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 1);
+        let dailyTaskSpotData = Array(30).fill(0).map(() => Math.floor(Math.random() * 2));
+        let dailyTaskEdgeData = Array(30).fill(0).map(() => Math.floor(Math.random() * 2));
+        let dailyTaskVacuumData = Array(30).fill(0).map(() => Math.floor(Math.random() * 1));
+        let dailyTaskTotalData = dailyTaskTypeData.map((val, idx) => 
+            val + dailyTaskPartialData[idx] + dailyTaskSpotData[idx] + dailyTaskEdgeData[idx] + dailyTaskVacuumData[idx]
         );
         
         // 스케줄 여부 데이터 (전체의 60~80%를 스케줄 작업으로 설정)
-        const dailyTaskScheduledData = dailyTaskTotalData.map(total => 
+        let dailyTaskScheduledData = dailyTaskTotalData.map(total => 
             Math.floor(total * (0.6 + Math.random() * 0.2))
         );
-        const dailyTaskUnscheduledData = dailyTaskTotalData.map((total, idx) => 
+        let dailyTaskUnscheduledData = dailyTaskTotalData.map((total, idx) => 
             total - dailyTaskScheduledData[idx]
         );
         
@@ -1677,7 +1676,7 @@
         ];
         
         const hourlyTaskCtx = document.getElementById('hourlyTaskDistributionChart').getContext('2d');
-        new Chart(hourlyTaskCtx, {
+        const hourlyTaskDistributionChart = new Chart(hourlyTaskCtx, {
             type: 'bar',
             data: {
                 labels: hours24,
@@ -1750,7 +1749,7 @@
         // 작업 수 (5개)
         const taskCount = 5;
         
-        new Chart(taskAreaCtx, {
+        const taskAreaComparisonChart = new Chart(taskAreaCtx, {
             type: 'bar',
             data: {
                 labels: ['전체 청소', '부분 청소', '스팟 청소', '엣지 청소', '진공 청소'],
@@ -1807,7 +1806,7 @@
         const taskTimeScale = calculateDynamicScale(taskTimeData);
         const taskTimeCtx = document.getElementById('taskTimeChart').getContext('2d');
         
-        new Chart(taskTimeCtx, {
+        const taskTimeChart = new Chart(taskTimeCtx, {
             type: 'bar',
             data: {
                 labels: ['전체 청소', '부분 청소', '스팟 청소', '엣지 청소', '진공 청소'],
@@ -1846,7 +1845,7 @@
         const taskEfficiencyScale = calculateDynamicScale(taskEfficiencyData);
         const taskEfficiencyCtx = document.getElementById('taskEfficiencyChart').getContext('2d');
         
-        new Chart(taskEfficiencyCtx, {
+        const taskEfficiencyChart = new Chart(taskEfficiencyCtx, {
             type: 'bar',
             data: {
                 labels: ['전체 청소', '부분 청소', '스팟 청소', '엣지 청소', '진공 청소'],
@@ -1892,8 +1891,8 @@
             robotColorMap['청소로봇-C01']
         ];
 
-        // 작업 종료 원인별 성과 데이터 (8개)
-        const completionReasonData = [
+        // 작업 종료 원인별 성과 데이터 (8개) - 전역 변수로 관리
+        let completionReasonData = [
             { reason: '정상 완료', count: 342, realArea: 98.5, time: 55 },
             { reason: '사용자 임의 종료', count: 45, realArea: 65.2, time: 38 },
             { reason: '배터리 부족', count: 28, realArea: 82.3, time: 48 },
@@ -1907,9 +1906,9 @@
         // 작업 종료 원인별 성과 페이지네이션
         let currentCompletionPage = 1;
         const completionItemsPerPage = 5;
-        const totalCompletionPages = Math.ceil(completionReasonData.length / completionItemsPerPage);
 
         function renderCompletionReasonTable() {
+            const totalCompletionPages = Math.ceil(completionReasonData.length / completionItemsPerPage);
             const startIdx = (currentCompletionPage - 1) * completionItemsPerPage;
             const endIdx = startIdx + completionItemsPerPage;
             const pageData = completionReasonData.slice(startIdx, endIdx);
@@ -1919,7 +1918,7 @@
                 <tr>
                     <td>${item.reason}</td>
                     <td>${item.count}</td>
-                    <td>${item.realArea}</td>
+                    <td>${item.realArea.toFixed(1)}</td>
                     <td>${item.time}</td>
                 </tr>
             `).join('');
@@ -1927,9 +1926,16 @@
             document.getElementById('completionPageInfo').textContent = `${currentCompletionPage} / ${totalCompletionPages}`;
             document.getElementById('completionPrevBtn').disabled = currentCompletionPage === 1;
             document.getElementById('completionNextBtn').disabled = currentCompletionPage === totalCompletionPages;
+            
+            // 비활성 버튼 스타일
+            document.getElementById('completionPrevBtn').style.opacity = currentCompletionPage === 1 ? '0.5' : '1';
+            document.getElementById('completionNextBtn').style.opacity = currentCompletionPage === totalCompletionPages ? '0.5' : '1';
+            document.getElementById('completionPrevBtn').style.cursor = currentCompletionPage === 1 ? 'not-allowed' : 'pointer';
+            document.getElementById('completionNextBtn').style.cursor = currentCompletionPage === totalCompletionPages ? 'not-allowed' : 'pointer';
         }
 
         function changeCompletionPage(direction) {
+            const totalCompletionPages = Math.ceil(completionReasonData.length / completionItemsPerPage);
             const newPage = currentCompletionPage + direction;
             if (newPage >= 1 && newPage <= totalCompletionPages) {
                 currentCompletionPage = newPage;
@@ -2106,13 +2112,13 @@
                 dailyTaskChart.data.datasets = [
                     {
                         label: '전체 청소',
-                        data: dailyTaskFullData,
+                        data: dailyTaskTypeData,
                         backgroundColor: dailyTaskTypeColors[0],
                         borderWidth: 0
                     },
                     {
                         label: '부분 청소',
-                        data: dailyTaskPartData,
+                        data: dailyTaskPartialData,
                         backgroundColor: dailyTaskTypeColors[1],
                         borderWidth: 0
                     },
@@ -2123,14 +2129,14 @@
                         borderWidth: 0
                     },
                     {
-                        label: '긴급 청소',
-                        data: dailyTaskEmergencyData,
+                        label: '엣지 청소',
+                        data: dailyTaskEdgeData,
                         backgroundColor: dailyTaskTypeColors[3],
                         borderWidth: 0
                     },
                     {
-                        label: '야간 청소',
-                        data: dailyTaskNightData,
+                        label: '진공 청소',
+                        data: dailyTaskVacuumData,
                         backgroundColor: dailyTaskTypeColors[4],
                         borderWidth: 0
                     }
@@ -2180,6 +2186,320 @@
             
             dailyTaskChart.update();
         }
+
+        // 로봇별 데이터 생성 함수
+        function generateRobotData(robotName) {
+            const seed = robotName.charCodeAt(robotName.length - 1); // 로봇 이름으로 시드 생성
+            const random = (seed, index) => {
+                const x = Math.sin(seed * (index + 1)) * 10000;
+                return x - Math.floor(x);
+            };
+
+            return {
+                summary: {
+                    workDays: Math.floor(random(seed, 1) * 5) + 24,
+                    workCount: Math.floor(random(seed, 2) * 30) + 120,
+                    cleaningArea: Math.floor(random(seed, 3) * 500) + 2500,
+                    cleaningTime: {
+                        hours: Math.floor(random(seed, 4) * 10) + 38,
+                        minutes: Math.floor(random(seed, 5) * 60)
+                    },
+                    efficiency: (random(seed, 6) * 15 + 85).toFixed(1)
+                },
+                dailyCleaning: {
+                    planned: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 100) * 20) + 90),
+                    real: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 200) * 30) + 60),
+                    workTime: Array(30).fill(0).map((_, i) => random(seed, i + 300) * 2 + 0.5)
+                },
+                dailyTasks: {
+                    type: {
+                        full: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 400) * 3) + 3),
+                        partial: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 500) * 3) + 2),
+                        spot: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 600) * 2) + 1),
+                        edge: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 700) * 2) + 1),
+                        vacuum: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 800) * 3) + 2)
+                    },
+                    schedule: {
+                        scheduled: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 900) * 4) + 6),
+                        unscheduled: Array(30).fill(0).map((_, i) => Math.floor(random(seed, i + 1000) * 2) + 1)
+                    }
+                },
+                hourlyTasks: {
+                    full: Array(24).fill(0).map((_, i) => Math.floor(random(seed, i + 1100) * 5) + 2),
+                    partial: Array(24).fill(0).map((_, i) => Math.floor(random(seed, i + 1200) * 4) + 1),
+                    spot: Array(24).fill(0).map((_, i) => Math.floor(random(seed, i + 1300) * 3)),
+                    emergency: Array(24).fill(0).map((_, i) => Math.floor(random(seed, i + 1400) * 2)),
+                    night: Array(24).fill(0).map((_, i) => Math.floor(random(seed, i + 1500) * 2))
+                },
+                taskDetails: [
+                    {
+                        name: '전체 청소',
+                        count: Math.floor(random(seed, 1600) * 20) + 80,
+                        planArea: random(seed, 1700) * 20 + 90,
+                        realArea: random(seed, 1800) * 15 + 85,
+                        time: Math.floor(random(seed, 1900) * 30) + 45,
+                        efficiency: random(seed, 2000) * 10 + 90
+                    },
+                    {
+                        name: '부분 청소',
+                        count: Math.floor(random(seed, 2100) * 15) + 40,
+                        planArea: random(seed, 2200) * 10 + 45,
+                        realArea: random(seed, 2300) * 10 + 42,
+                        time: Math.floor(random(seed, 2400) * 15) + 25,
+                        efficiency: random(seed, 2500) * 10 + 85
+                    },
+                    {
+                        name: '스팟 청소',
+                        count: Math.floor(random(seed, 2600) * 10) + 15,
+                        planArea: random(seed, 2700) * 5 + 12,
+                        realArea: random(seed, 2800) * 4 + 10,
+                        time: Math.floor(random(seed, 2900) * 5) + 5,
+                        efficiency: random(seed, 3000) * 10 + 88
+                    },
+                    {
+                        name: '긴급 청소',
+                        count: Math.floor(random(seed, 3100) * 8) + 10,
+                        planArea: random(seed, 3200) * 10 + 35,
+                        realArea: random(seed, 3300) * 8 + 32,
+                        time: Math.floor(random(seed, 3400) * 10) + 18,
+                        efficiency: random(seed, 3500) * 10 + 92
+                    },
+                    {
+                        name: '야간 청소',
+                        count: Math.floor(random(seed, 3600) * 6) + 6,
+                        planArea: random(seed, 3700) * 15 + 60,
+                        realArea: random(seed, 3800) * 12 + 58,
+                        time: Math.floor(random(seed, 3900) * 20) + 35,
+                        efficiency: random(seed, 4000) * 10 + 94
+                    },
+                    {
+                        name: '엣지 청소',
+                        count: Math.floor(random(seed, 4100) * 5) + 5,
+                        planArea: random(seed, 4200) * 8 + 28,
+                        realArea: random(seed, 4300) * 7 + 25,
+                        time: Math.floor(random(seed, 4400) * 8) + 15,
+                        efficiency: random(seed, 4500) * 10 + 90
+                    },
+                    {
+                        name: '코너 청소',
+                        count: Math.floor(random(seed, 4600) * 4) + 4,
+                        planArea: random(seed, 4700) * 5 + 15,
+                        realArea: random(seed, 4800) * 4 + 13,
+                        time: Math.floor(random(seed, 4900) * 6) + 10,
+                        efficiency: random(seed, 5000) * 10 + 75
+                    },
+                    {
+                        name: '특별 청소',
+                        count: Math.floor(random(seed, 5100) * 3) + 2,
+                        planArea: random(seed, 5200) * 12 + 40,
+                        realArea: random(seed, 5300) * 10 + 38,
+                        time: Math.floor(random(seed, 5400) * 15) + 25,
+                        efficiency: random(seed, 5500) * 10 + 88
+                    },
+                    {
+                        name: '진공 청소',
+                        count: Math.floor(random(seed, 5600) * 2) + 1,
+                        planArea: random(seed, 5700) * 10 + 50,
+                        realArea: random(seed, 5800) * 8 + 48,
+                        time: Math.floor(random(seed, 5900) * 20) + 30,
+                        efficiency: random(seed, 6000) * 10 + 86
+                    },
+                    {
+                        name: '기타 청소',
+                        count: Math.floor(random(seed, 6100) * 1) + 1,
+                        planArea: random(seed, 6200) * 4 + 10,
+                        realArea: random(seed, 6300) * 3 + 8,
+                        time: Math.floor(random(seed, 6400) * 5) + 6,
+                        efficiency: random(seed, 6500) * 10 + 76
+                    }
+                ],
+                completionTypes: [
+                    {
+                        reason: '정상 완료',
+                        count: Math.floor(random(seed, 6600) * 50) + 300,
+                        realArea: random(seed, 6700) * 15 + 85,
+                        time: Math.floor(random(seed, 6800) * 20) + 45
+                    },
+                    {
+                        reason: '사용자 임의 종료',
+                        count: Math.floor(random(seed, 6900) * 15) + 35,
+                        realArea: random(seed, 7000) * 15 + 60,
+                        time: Math.floor(random(seed, 7100) * 15) + 30
+                    },
+                    {
+                        reason: '배터리 부족',
+                        count: Math.floor(random(seed, 7200) * 10) + 20,
+                        realArea: random(seed, 7300) * 15 + 75,
+                        time: Math.floor(random(seed, 7400) * 15) + 40
+                    },
+                    {
+                        reason: '긴급 정지',
+                        count: Math.floor(random(seed, 7500) * 5) + 10,
+                        realArea: random(seed, 7600) * 10 + 40,
+                        time: Math.floor(random(seed, 7700) * 10) + 20
+                    },
+                    {
+                        reason: '장애물 감지',
+                        count: Math.floor(random(seed, 7800) * 5) + 8,
+                        realArea: random(seed, 7900) * 12 + 48,
+                        time: Math.floor(random(seed, 8000) * 12) + 25
+                    },
+                    {
+                        reason: '오류 발생',
+                        count: Math.floor(random(seed, 8100) * 4) + 5,
+                        realArea: random(seed, 8200) * 10 + 35,
+                        time: Math.floor(random(seed, 8300) * 10) + 18
+                    },
+                    {
+                        reason: '통신 오류',
+                        count: Math.floor(random(seed, 8400) * 3) + 3,
+                        realArea: random(seed, 8500) * 8 + 25,
+                        time: Math.floor(random(seed, 8600) * 8) + 12
+                    },
+                    {
+                        reason: '기타',
+                        count: Math.floor(random(seed, 8700) * 2) + 2,
+                        realArea: random(seed, 8800) * 8 + 20,
+                        time: Math.floor(random(seed, 8900) * 6) + 10
+                    }
+                ]
+            };
+        }
+
+        // 로봇 선택 시 업데이트 함수
+        function updateRobotDetail(robotName) {
+            const data = generateRobotData(robotName);
+
+            // 1. 요약 카드 업데이트
+            const summaryCards = document.querySelectorAll('#robotDetailSection .summary-cards .summary-card');
+            if (summaryCards.length >= 5) {
+                summaryCards[0].querySelector('.summary-card-value').textContent = `${data.summary.workDays}일`;
+                summaryCards[1].querySelector('.summary-card-value').textContent = `${data.summary.workCount}건`;
+                summaryCards[2].querySelector('.summary-card-value').textContent = `${data.summary.cleaningArea.toLocaleString()} m²`;
+                summaryCards[3].querySelector('.summary-card-value').innerHTML = `${data.summary.cleaningTime.hours}시간 ${data.summary.cleaningTime.minutes}분`;
+                summaryCards[4].querySelector('.summary-card-value').textContent = `${data.summary.efficiency} m²/시간`;
+            }
+
+            // 2. 일자별 청소 성과 차트 업데이트
+            dailyCleaningChart.data.datasets[0].data = data.dailyCleaning.real;
+            dailyCleaningChart.data.datasets[1].data = data.dailyCleaning.planned;
+            dailyCleaningChart.data.datasets[2].data = data.dailyCleaning.workTime;
+            dailyCleaningChart.update();
+
+            // 3. 일자별 작업 수행 분포 데이터 업데이트
+            dailyTaskTypeData = data.dailyTasks.type.full;
+            dailyTaskPartialData = data.dailyTasks.type.partial;
+            dailyTaskSpotData = data.dailyTasks.type.spot;
+            dailyTaskEdgeData = data.dailyTasks.type.edge;
+            dailyTaskVacuumData = data.dailyTasks.type.vacuum;
+
+            dailyTaskTotalData = Array(30).fill(0).map((_, i) => 
+                data.dailyTasks.type.full[i] + data.dailyTasks.type.partial[i] + 
+                data.dailyTasks.type.spot[i] + data.dailyTasks.type.edge[i] + 
+                data.dailyTasks.type.vacuum[i]
+            );
+
+            dailyTaskScheduledData = data.dailyTasks.schedule.scheduled;
+            dailyTaskUnscheduledData = data.dailyTasks.schedule.unscheduled;
+
+            // 현재 선택된 뷰 확인 및 차트 업데이트
+            const typeBtn = document.getElementById('dailyTaskTypeBtn');
+            const scheduleBtn = document.getElementById('dailyTaskScheduleBtn');
+            const totalBtn = document.getElementById('dailyTaskTotalBtn');
+            
+            if (typeBtn.style.background.includes('rgb(38, 37, 79)')) {
+                toggleDailyTaskView('type');
+            } else if (scheduleBtn.style.background.includes('rgb(38, 37, 79)')) {
+                toggleDailyTaskView('schedule');
+            } else {
+                toggleDailyTaskView('total');
+            }
+
+            // 4. 시간대별 작업 수행 분포 차트 업데이트
+            hourlyTaskDistributionChart.data.datasets[0].data = data.hourlyTasks.full;
+            hourlyTaskDistributionChart.data.datasets[1].data = data.hourlyTasks.partial;
+            hourlyTaskDistributionChart.data.datasets[2].data = data.hourlyTasks.spot;
+            hourlyTaskDistributionChart.data.datasets[3].data = data.hourlyTasks.emergency;
+            hourlyTaskDistributionChart.data.datasets[4].data = data.hourlyTasks.night;
+            const hourlyScale = calculateDynamicScale([
+                ...data.hourlyTasks.full, ...data.hourlyTasks.partial, ...data.hourlyTasks.spot,
+                ...data.hourlyTasks.emergency, ...data.hourlyTasks.night
+            ]);
+            hourlyTaskDistributionChart.options.scales.y.min = hourlyScale.min;
+            hourlyTaskDistributionChart.options.scales.y.max = hourlyScale.max;
+            hourlyTaskDistributionChart.options.scales.y.ticks = hourlyScale.ticks;
+            hourlyTaskDistributionChart.update();
+
+            // 5. 작업별 상세 성과 업데이트
+            // 전역 taskDetailData 업데이트
+            taskDetailData = data.taskDetails;
+            
+            // 파이 차트 레이블 및 데이터 업데이트
+            taskPieChart.data.labels = data.taskDetails.map(t => t.name);
+            taskPieChart.data.datasets[0].data = data.taskDetails.map(t => t.count);
+            taskPieChart.update();
+
+            // 테이블 페이지 리셋 및 렌더링
+            currentTaskPage = 1;
+            renderTaskTable();
+
+            // 작업별 비교 차트들 - 상위 5개 작업만 표시
+            const top5Tasks = data.taskDetails.slice(0, 5);
+            const taskLabels = top5Tasks.map(t => t.name);
+            const taskPlannedAreaData = top5Tasks.map(t => t.planArea);
+            const taskRealAreaData = top5Tasks.map(t => t.realArea);
+            const taskTimeDataNew = top5Tasks.map(t => t.time);
+            const taskEfficiencyDataNew = top5Tasks.map(t => t.efficiency);
+
+            // 면적 비교 차트 업데이트
+            taskAreaComparisonChart.data.labels = taskLabels;
+            taskAreaComparisonChart.data.datasets[0].data = taskRealAreaData;
+            taskAreaComparisonChart.data.datasets[1].data = taskPlannedAreaData;
+            const areaScale = calculateDynamicScale([...taskRealAreaData, ...taskPlannedAreaData]);
+            taskAreaComparisonChart.options.scales.x.min = areaScale.min;
+            taskAreaComparisonChart.options.scales.x.max = areaScale.max;
+            taskAreaComparisonChart.options.scales.x.ticks = areaScale.ticks;
+            taskAreaComparisonChart.update();
+
+            // 시간 비교 차트 업데이트
+            taskTimeChart.data.labels = taskLabels;
+            taskTimeChart.data.datasets[0].data = taskTimeDataNew;
+            const timeScale = calculateDynamicScale(taskTimeDataNew);
+            taskTimeChart.options.scales.x.min = timeScale.min;
+            taskTimeChart.options.scales.x.max = timeScale.max;
+            taskTimeChart.options.scales.x.ticks = timeScale.ticks;
+            taskTimeChart.update();
+
+            // 효율 비교 차트 업데이트
+            taskEfficiencyChart.data.labels = taskLabels;
+            taskEfficiencyChart.data.datasets[0].data = taskEfficiencyDataNew;
+            const efficiencyScale = calculateDynamicScale(taskEfficiencyDataNew);
+            taskEfficiencyChart.options.scales.x.min = efficiencyScale.min;
+            taskEfficiencyChart.options.scales.x.max = efficiencyScale.max;
+            taskEfficiencyChart.options.scales.x.ticks = efficiencyScale.ticks;
+            taskEfficiencyChart.update();
+
+            // 6. 작업 종료 유형 업데이트
+            // 전역 completionReasonData 업데이트
+            completionReasonData = data.completionTypes;
+            
+            // 파이 차트 업데이트 (상위 5개만)
+            const completionCounts = data.completionTypes.slice(0, 5).map(t => t.count);
+            taskCompletionTypeChart.data.datasets[0].data = completionCounts;
+            taskCompletionTypeChart.update();
+
+            // 작업 종료 유형별 상세 성과 테이블 페이지 리셋 및 렌더링
+            currentCompletionPage = 1;
+            renderCompletionReasonTable();
+        }
+
+        // 로봇 선택 드롭다운에 이벤트 리스너 추가
+        document.getElementById('robotSelector').addEventListener('change', function() {
+            updateRobotDetail(this.value);
+        });
+
+        // 페이지 로드 시 첫 번째 로봇 데이터로 초기화
+        updateRobotDetail('청소로봇-A01');
     </script>
 </body>
 </html>
