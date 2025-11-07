@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>청소로봇 운영 성과 월간 리포트 - 2024년 11월</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #26254f 0%, #1f86d1 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .header .info-text {
+            font-size: 1em;
+            opacity: 0.85;
+            margin: 5px 0;
+        }
+
+        .header .publish-date {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 0.85em;
+            opacity: 0.75;
+            margin: 0;
+        }
+
+        .report-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #26254f;
+        }
+
+        .info-item strong {
+            color: #26254f;
+            margin-right: 10px;
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            background: #26254f;
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .parallel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .robot-status-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #26254f;
+        }
+
+        .robot-status-card h3 {
+            color: #26254f;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .robot-count {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1f86d1;
+            margin-bottom: 15px;
+        }
+
+        .robot-count.navy {
+            color: #26254f;
+        }
+
+        .robot-count.zero {
+            color: #6c757d;
+        }
+
+        .robot-list {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .robot-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            color: #495057;
+        }
+
+        .robot-item:last-child {
+            border-bottom: none;
+        }
+
+        .chart-container {
+            background: white;
+            height: 400px;
+            border-radius: 6px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 30px;
+        }
+
+        .chart-container-large {
+            height: 500px;
+        }
+
+        .chart-container-narrow {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table thead {
+            background: #26254f;
+            color: white;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table th {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .data-table td {
+            text-align: center;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #26254f;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .summary-card-label {
+            color: #26254f;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .summary-card-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1f86d1;
+            margin-bottom: 10px;
+        }
+
+        .summary-card-change {
+            font-size: 0.9em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: auto;
+        }
+
+        .summary-card-change.positive {
+            color: #28a745;
+        }
+
+        .summary-card-change.negative {
+            color: #dc3545;
+        }
+
+        .summary-card-change-icon {
+            font-size: 1.1em;
+        }
+
+        .error-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-table thead {
+            background: #f8f9fa;
+            color: #26254f;
+        }
+
+        .error-table th,
+        .error-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .error-table th {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .error-table td {
+            text-align: center;
+        }
+
+        .pie-chart-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .pie-chart-wrapper {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .pie-chart-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #26254f;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .footer {
+            background: transparent;
+            color: #6c757d;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .sub-section {
+            margin: 30px 0;
+            padding-top: 30px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .section-content > .sub-section:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .sub-section h3 {
+            color: #26254f;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .parallel-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pie-chart-container {
+                grid-template-columns: 1fr;
+            }
+
+            .data-table,
+            .error-table {
+                font-size: 0.9em;
+            }
+
+            .data-table th,
+            .data-table td,
+            .error-table th,
+            .error-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <div class="header">
+            <img src="images/logo_horizontal_all_w.png" alt="솔링크 로고" style="height: 32px; margin-bottom: 10px;">
+            <h1>청소로봇 운영 성과 월간 리포트</h1>
+            <p class="subtitle">2024년 11월 운영 성과 분석 (2024.11.01 - 2024.11.30)</p>
+            <p class="info-text">집계 사이트: 서울 본사 빌딩</p>
+        </div>
+
+        <!-- 1. N월 로봇 가동 현황 -->
+        <div class="section">
+            <div class="section-header">11월 로봇 가동 현황</div>
+            <div class="section-content">
+                <div class="parallel-grid">
+                    <!-- 사이트에 등록된 로봇 -->
+                    <div class="robot-status-card">
+                        <h3>사이트에 등록된 로봇</h3>
+                        <div class="robot-count navy">6대</div>
+                        <div class="robot-list">
+                            <div class="robot-item">청소로봇-A01 (SN-2024-A01-001)</div>
+                            <div class="robot-item">청소로봇-A02 (SN-2024-A02-002)</div>
+                            <div class="robot-item">청소로봇-B01 (SN-2024-B01-003)</div>
+                            <div class="robot-item">청소로봇-B02 (SN-2024-B02-004)</div>
+                            <div class="robot-item">청소로봇-C01 (SN-2024-C01-005)</div>
+                            <div class="robot-item">청소로봇-C02 (SN-2024-C02-006)</div>
+                        </div>
+                    </div>
+
+                    <!-- 당월 가동 로봇 -->
+                    <div class="robot-status-card">
+                        <h3>당월 가동 로봇</h3>
+                        <div class="robot-count">6대</div>
+                        <div class="robot-list">
+                            <div class="robot-item">청소로봇-A01 (SN-2024-A01-001)</div>
+                            <div class="robot-item">청소로봇-A02 (SN-2024-A02-002)</div>
+                            <div class="robot-item">청소로봇-B01 (SN-2024-B01-003)</div>
+                            <div class="robot-item">청소로봇-B02 (SN-2024-B02-004)</div>
+                            <div class="robot-item">청소로봇-C01 (SN-2024-C01-005)</div>
+                            <div class="robot-item">청소로봇-C02 (SN-2024-C02-006)</div>
+                        </div>
+                        <div style="font-size: 0.9em; color: #6c757d; margin-top: 15px;">
+                            * 한 건이라도 유효한 (청소 수행 시간이 0이 아닌) 청소 작업을 수행한 로봇
+                        </div>
+                    </div>
+
+                    <!-- 당월 비가동 로봇 -->
+                    <div class="robot-status-card">
+                        <h3>당월 비가동 로봇</h3>
+                        <div class="robot-count zero">0대</div>
+                        <div class="robot-list">
+                            <div class="robot-item" style="color: #6c757d; font-style: italic;">비가동 로봇 없음</div>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+        <!-- 2. 가동 로봇 작업 성과 요약 -->
+        <div class="section">
+            <div class="section-header">전체 로봇 작업 성과</div>
+            <div class="section-content">
+                <!-- 요약 -->
+                <div class="sub-section">
+                    <h3>요약</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>로봇</th>
+                                <th>작업 일수 합계</th>
+                                <th>작업 건수 합계</th>
+                                <th>실 청소 면적 합계 (m²)</th>
+                                <th>계획 청소 면적 합계 (m²)</th>
+                                <th>청소 시간 합계 (시간, 분)</th>
+                                <th>청소 효율 (m²/시간)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>청소로봇-A01</td>
+                                <td>28</td>
+                                <td>145</td>
+                                <td>2,450</td>
+                                <td>2,600</td>
+                                <td>24시간 30분</td>
+                                <td>100.5</td>
+                            </tr>
+                            <tr>
+                                <td>청소로봇-A02</td>
+                                <td>27</td>
+                                <td>142</td>
+                                <td>2,380</td>
+                                <td>2,550</td>
+                                <td>23시간 45분</td>
+                                <td>101.2</td>
+                            </tr>
+                            <tr>
+                                <td>청소로봇-B01</td>
+                                <td>29</td>
+                                <td>158</td>
+                                <td>2,680</td>
+                                <td>2,800</td>
+                                <td>26시간 15분</td>
+                                <td>102.0</td>
+                            </tr>
+                            <tr>
+                                <td>청소로봇-B02</td>
+                                <td>28</td>
+                                <td>152</td>
+                                <td>2,550</td>
+                                <td>2,700</td>
+                                <td>25시간 20분</td>
+                                <td>101.5</td>
+                            </tr>
+                            <tr>
+                                <td>청소로봇-C01</td>
+                                <td>30</td>
+                                <td>165</td>
+                                <td>2,850</td>
+                                <td>3,000</td>
+                                <td>28시간 10분</td>
+                                <td>101.3</td>
+                            </tr>
+                            <tr>
+                                <td>청소로봇-C02</td>
+                                <td>29</td>
+                                <td>160</td>
+                                <td>2,750</td>
+                                <td>2,900</td>
+                                <td>27시간 30분</td>
+                                <td>101.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 일자별 작업 건수 패턴 -->
+                <div class="sub-section">
+                    <h3>일자별 작업 건수 패턴</h3>
+                    <div class="chart-container">
+                        <canvas id="weeklyTaskCountChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 로봇 간 성과 비교 -->
+                <div class="sub-section">
+                    <h3>로봇 간 성과 비교</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                        <!-- 청소 면적 비교 -->
+                        <div>
+                            <h4 style="color: #495057; margin-bottom: 15px;">청소 면적 비교</h4>
+                            <div class="chart-container">
+                                <canvas id="cleaningAreaChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 청소 시간 비교 -->
+                        <div>
+                            <h4 style="color: #495057; margin-bottom: 15px;">청소 시간 비교</h4>
+                            <div class="chart-container">
+                                <canvas id="cleaningTimeChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 청소 효율 비교 -->
+                        <div>
+                            <h4 style="color: #495057; margin-bottom: 15px;">청소 효율 비교</h4>
+                            <div class="chart-container">
+                                <canvas id="cleaningEfficiencyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 시간대별 로봇 작업 분포 -->
+                <div class="sub-section">
+                    <h3>시간대별 작업 수행 로봇 분포</h3>
+                    <div class="chart-container chart-container-large">
+                        <canvas id="hourlyWorkDistributionChart"></canvas>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                        
+        <!-- 3. 로봇별 작업 성과 상세 -->
+        <div class="section">
+            <div class="section-header" style="display: flex; flex-direction: column; align-items: flex-start; gap: 15px;">
+                <span>로봇별 작업 성과 상세</span>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <label for="robotSelector" style="font-size: 0.9em; color: white; font-weight: normal;">조회 로봇:</label>
+                    <select id="robotSelector" style="padding: 5px 10px; border: 1px solid #dee2e6; border-radius: 4px; font-size: 0.9em; background: white; cursor: pointer;">
+                        <option value="청소로봇-A01">청소로봇-A01</option>
+                        <option value="청소로봇-A02">청소로봇-A02</option>
+                        <option value="청소로봇-B01">청소로봇-B01</option>
+                        <option value="청소로봇-B02">청소로봇-B02</option>
+                        <option value="청소로봇-C01">청소로봇-C01</option>
+                        <option value="청소로봇-C02">청소로봇-C02</option>
+                    </select>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="sub-section">
+                    <h3>요약</h3>
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="summary-card-label">작업 일수 합계</div>
+                            <div class="summary-card-value">28일</div>
+                            <div class="summary-card-change negative">
+                                <span class="summary-card-change-icon">▼</span>
+                                <span>-2일 (-6.7%)</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-card-label">작업 건수 합계</div>
+                            <div class="summary-card-value">145건</div>
+                            <div class="summary-card-change positive">
+                                <span class="summary-card-change-icon">▲</span>
+                                <span>+12건 (+9.0%)</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-card-label">실 청소 면적 합계</div>
+                            <div class="summary-card-value">2,450 m²</div>
+                            <div class="summary-card-change positive">
+                                <span class="summary-card-change-icon">▲</span>
+                                <span>+120 m² (+5.2%)</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-card-label">청소 시간 합계</div>
+                            <div class="summary-card-value">24시간 30분</div>
+                            <div class="summary-card-change negative">
+                                <span class="summary-card-change-icon">▼</span>
+                                <span>-1시간 15분 (-4.9%)</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-card-label">평균 효율</div>
+                            <div class="summary-card-value">100.5 m²/시간</div>
+                            <div class="summary-card-change positive">
+                                <span class="summary-card-change-icon">▲</span>
+                                <span>+8.3 m²/시간 (+9.0%)</span>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+
+                <!-- 일자별 작업 수행 분포 -->
+                <div class="sub-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>일자별 작업 수행 분포</h3>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <label style="font-size: 0.9em; color: #495057;">표시 방식:</label>
+                            <div style="display: flex; gap: 5px; background: #f8f9fa; padding: 5px; border-radius: 6px; border: 1px solid #dee2e6;">
+                                <button id="dailyTaskTypeBtn" onclick="toggleDailyTaskView('type')" style="padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85em; background: transparent; color: #495057; font-weight: 500; transition: all 0.2s;">작업 유형별</button>
+                                <button id="dailyTaskScheduleBtn" onclick="toggleDailyTaskView('schedule')" style="padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85em; background: transparent; color: #495057; font-weight: 500; transition: all 0.2s;">스케줄 여부</button>
+                                <button id="dailyTaskTotalBtn" onclick="toggleDailyTaskView('total')" style="padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85em; background: #26254f; color: white; font-weight: 500; transition: all 0.2s;">전체 합계</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="dailyTaskDistributionChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 일자별 청소 성과 -->
+                <div class="sub-section">
+                    <h3>일자별 청소 성과</h3>
+                    <div class="chart-container chart-container-large">
+                        <canvas id="dailyCleaningChart"></canvas>
+                        </div>
+                    </div>
+
+                <!-- 작업별 상세 성과 -->
+                <div class="sub-section">
+                    <h3>작업별 상세 성과</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px; margin-bottom: 40px;">
+                        <!-- 파이차트 -->
+                        <div>
+                            <div class="chart-container" style="height: 450px;">
+                                <canvas id="taskPieChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- 테이블 -->
+                        <div>
+                            <table class="error-table">
+                                <thead>
+                                    <tr>
+                                        <th>작업명</th>
+                                        <th>수행 건수</th>
+                                        <th>평균 실 청소<br>면적 (m²)</th>
+                                        <th>평균 계획<br>면적 (m²)</th>
+                                        <th>평균 청소<br>시간 (분)</th>
+                                        <th>평균 효율<br>(m²/시간)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="taskTableBody">
+                                    <!-- JavaScript로 동적 생성 -->
+                                </tbody>
+                            </table>
+                            
+                            <!-- 페이지네이션 -->
+                            <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+                                <button id="taskPrevBtn" onclick="changeTaskPage(-1)" style="padding: 8px 16px; border: 1px solid #dee2e6; border-radius: 4px; background: white; cursor: pointer; font-size: 0.9em; color: #495057;">이전</button>
+                                <span id="taskPageInfo" style="font-size: 0.9em; color: #495057; min-width: 80px; text-align: center;">1 / 2</span>
+                                <button id="taskNextBtn" onclick="changeTaskPage(1)" style="padding: 8px 16px; border: 1px solid #dee2e6; border-radius: 4px; background: white; cursor: pointer; font-size: 0.9em; color: #495057;">다음</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 작업별 성과 비교 차트들 (h3 제목 생략) -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h4 style="color: #495057; margin-bottom: 15px;">평균 실 청소 면적 및 평균 계획 면적 비교</h4>
+                            <div class="chart-container">
+                                <canvas id="taskAreaComparisonChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #495057; margin-bottom: 15px;">평균 청소 시간 비교</h4>
+                            <div class="chart-container">
+                                <canvas id="taskTimeChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #495057; margin-bottom: 15px;">평균 청소 효율 비교</h4>
+                            <div class="chart-container">
+                                <canvas id="taskEfficiencyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 시간대별 작업 수행 분포 -->
+                <div class="sub-section">
+                    <h3>시간대별 작업 수행 분포</h3>
+                    <div class="chart-container chart-container-large">
+                        <canvas id="hourlyTaskDistributionChart"></canvas>
+                        </div>
+                    </div>
+
+                <!-- 작업 종료 유형별 성과 -->
+                <div class="sub-section">
+                    <h3>작업 종료 유형별 성과</h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px; margin-bottom: 30px;">
+                        <!-- 파이차트 -->
+                        <div>
+                            <h4 style="color: #495057; margin-bottom: 15px;">작업 종료 유형 구성</h4>
+                            <div class="chart-container" style="height: 450px; border: none;">
+                                <canvas id="taskCompletionTypeChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <!-- 작업 종료 유형별 상세 성과 테이블 -->
+                        <div>
+                            <h4 style="color: #495057; margin-bottom: 15px;">작업 종료 유형별 상세 성과</h4>
+                            <table class="error-table">
+                                <thead>
+                                    <tr>
+                                        <th>작업 종료 유형</th>
+                                        <th>발생 건수</th>
+                                        <th>평균 실 청소<br>면적 (m²)</th>
+                                        <th>평균 청소<br>시간 (분)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="completionReasonTableBody">
+                                    <!-- JavaScript로 동적 생성 -->
+                                </tbody>
+                            </table>
+                            
+                            <!-- 페이지네이션 -->
+                            <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+                                <button id="completionPrevBtn" onclick="changeCompletionPage(-1)" style="padding: 8px 16px; border: 1px solid #dee2e6; border-radius: 4px; background: white; cursor: pointer; font-size: 0.9em; color: #495057;">이전</button>
+                                <span id="completionPageInfo" style="font-size: 0.9em; color: #495057; min-width: 80px; text-align: center;">1 / 2</span>
+                                <button id="completionNextBtn" onclick="changeCompletionPage(1)" style="padding: 8px 16px; border: 1px solid #dee2e6; border-radius: 4px; background: white; cursor: pointer; font-size: 0.9em; color: #495057;">다음</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 작업 종료 유형별 발생 오류 -->
+                    <div>
+                        <h4 style="color: #495057; margin-bottom: 15px;">작업 종료 유형별 발생 오류</h4>
+                        
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                            <label for="completionTypeSelector" style="font-size: 0.9em; color: #495057;">작업 종료 유형:</label>
+                            <select id="completionTypeSelector" onchange="updateErrorTable()" style="padding: 5px 10px; border: 1px solid #dee2e6; border-radius: 4px; font-size: 0.9em; background: white; cursor: pointer;">
+                                <option value="사용자 임의 종료">사용자 임의 종료</option>
+                                <option value="정상 완료">정상 완료</option>
+                                <option value="배터리 부족">배터리 부족</option>
+                                <option value="긴급 정지">긴급 정지</option>
+                                <option value="장애물 감지">장애물 감지</option>
+                            </select>
+                        </div>
+                        
+                        <table class="error-table" id="errorDetailTable">
+                            <thead>
+                                <tr>
+                                    <th>오류 유형</th>
+                                    <th>발생 건수 합계</th>
+                                </tr>
+                            </thead>
+                            <tbody id="errorDetailTableBody">
+                                <!-- JavaScript로 동적 생성 -->
+                            </tbody>
+                        </table>
+                        
+                        <!-- 페이지네이션 -->
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+                            <button id="errorPrevBtn" onclick="changeErrorPage(-1)" style="padding: 8px 16px; border: 1px solid #dee2e6; border-radius: 4px; background: white; cursor: pointer; font-size: 0.9em; color: #495057;">이전</button>
+                            <span id="errorPageInfo" style="font-size: 0.9em; color: #495057; min-width: 80px; text-align: center;">1 / 1</span>
+                            <button id="errorNextBtn" onclick="changeErrorPage(1)" style="padding: 8px 16px; border: 1px solid #dee2e6; border-radius: 4px; background: white; cursor: pointer; font-size: 0.9em; color: #495057;">다음</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 푸터 -->
+        <div class="footer">
+            <p><img src="images/SOLlink_Horizontal.png" alt="솔링크" style="height: 45px; margin-bottom: 10px;"></p>
+            <p>본 리포트는 2024년 11월 청소로봇 운영 데이터를 기반으로 자동 생성되었습니다.</p>
+            <p>리포트 버전: v 1.0 | 발행일: 2024.12.01 오전 9시</p>
+            <p>문의사항: support@solink.com</p>
+            <p style="margin-top: 10px;">ⓒ2020-2025 Bigwave Robotics Inc. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // 색상 팔레트
+        const primaryColor = '#26254f';
+        const secondaryMain = '#0cdd01';
+        const secondarySub = '#1f86d1';
+
+        // 로봇별 테마 컬러 매핑 (6대 로봇용)
+        // 지표별 대표 색상 정의
+        const metricColors = {
+            workDays: '#597EF7',        // 작업 일수 - 단색
+            workCount: '#10239E',       // 작업 건수 - 단색
+            realArea: '#26254f',        // 실 청소 면적 - 단색
+            plannedArea: '#ADB5BD',     // 계획 청소 면적 - 무채색 그레이
+            cleaningTime: '#03B800',    // 청소 시간 - 그린 (로봇별 변주 필요)
+            efficiency: '#179983'       // 청소 효율 - 틸 (로봇별 변주 필요)
+        };
+
+        const robotColorMap = {
+            '청소로봇-A01': '#26254f',  // primaryColor
+            '청소로봇-A02': '#1f86d1',  // secondarySub
+            '청소로봇-B01': '#0cdd01',  // secondaryMain
+            '청소로봇-B02': '#4a90e2',  // secondarySub 변형 (밝은 파란색)
+            '청소로봇-C01': '#00b894',  // secondaryMain 변형 (청록색)
+            '청소로봇-C02': '#6c5ce7',  // primaryColor 변형 (보라색)
+            '청소로봇-C03': '#a29bfe'   // primaryColor 변형 (연한 보라색)
+        };
+
+        // 로봇 이름 배열에 따라 색상 배열 반환
+        function getRobotColors(labels) {
+            return labels.map(label => robotColorMap[label] || primaryColor);
+        }
+
+        // 지표별 로봇 색상 생성 함수
+        // metricColor: 해당 지표의 대표 색상
+        // robotCount: 로봇 수 (일반적으로 5~6)
+        function getMetricRobotColors(metricColor, robotCount) {
+            const hex = metricColor.replace('#', '');
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            
+            const colors = [];
+            
+            // 명도 범위를 더 넓게: 0.35 (매우 어두움) ~ 1.65 (매우 밝음)까지 분산
+            // 각 항목 간 명확한 차이를 위해 간격을 크게 설정
+            for (let i = 0; i < robotCount; i++) {
+                // 명도 조정: 더 큰 간격으로 분포 (robotCount에 따라 동적 계산)
+                const step = robotCount > 1 ? 1.3 / (robotCount - 1) : 0;
+                const lightnessFactor = 0.35 + (i * step);
+                
+                let newR = Math.min(255, Math.round(r * lightnessFactor));
+                let newG = Math.min(255, Math.round(g * lightnessFactor));
+                let newB = Math.min(255, Math.round(b * lightnessFactor));
+                
+                // 채도 조정 - 중간 단계는 채도를 더 높여 구분 명확하게
+                let saturationFactor;
+                if (i < robotCount / 2) {
+                    // 어두운 색상: 채도 높게 유지
+                    saturationFactor = 0.95;
+                } else {
+                    // 밝은 색상: 채도를 조금 낮춰 과하지 않게
+                    saturationFactor = 0.75 - (i - robotCount / 2) * 0.05;
+                }
+                
+                const avg = (newR + newG + newB) / 3;
+                newR = Math.round(avg + (newR - avg) * saturationFactor);
+                newG = Math.round(avg + (newG - avg) * saturationFactor);
+                newB = Math.round(avg + (newB - avg) * saturationFactor);
+                
+                // 값이 범위를 벗어나지 않도록 제한
+                newR = Math.max(0, Math.min(255, newR));
+                newG = Math.max(0, Math.min(255, newG));
+                newB = Math.max(0, Math.min(255, newB));
+                
+                colors.push(`rgb(${newR}, ${newG}, ${newB})`);
+            }
+            
+            return colors;
+        }
+
+        // 작업 유형별 색상 생성 함수 (한 로봇 내의 작업 유형 구분용)
+        function getTaskTypeColors(baseColor, count) {
+            // 기본 색상의 색조(hue)를 기준으로 비슷한 톤의 다른 색상 생성
+            const hex = baseColor.replace('#', '');
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                const lightnessAdjust = 1 + (i * 0.2);
+                
+                let newR = Math.min(255, Math.round(r * lightnessAdjust));
+                let newG = Math.min(255, Math.round(g * lightnessAdjust));
+                let newB = Math.min(255, Math.round(b * lightnessAdjust));
+                
+                // 약간의 색조 변화 추가
+                if (i > 0 && i % 2 === 0) {
+                    const temp = newR;
+                    newR = Math.min(255, Math.round((newR * 0.9 + newG * 0.1)));
+                    newG = Math.min(255, Math.round((newG * 0.9 + newB * 0.1)));
+                    newB = Math.min(255, Math.round((newB * 0.9 + temp * 0.1)));
+                }
+                
+                colors.push(`rgb(${newR}, ${newG}, ${newB})`);
+            }
+            return colors;
+        }
+
+        // 베이스 색상에서 명도/채도를 조절하여 변주 색상 배열 생성
+        function generateColorVariations(baseColor, count) {
+            // baseColor를 RGB로 변환
+            const hex = baseColor.replace('#', '');
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            
+            // 초록색 계열인지 확인 (G가 R, B보다 훨씬 높은 경우)
+            const isGreen = g > r * 2 && g > b * 2;
+            
+            const variations = [];
+            
+            if (isGreen) {
+                // 초록색 계열은 명확한 변주를 위해 사전 정의된 색상 사용
+                const greenShades = [
+                    'rgb(6, 94, 1)',      // 매우 어두운 녹색
+                    'rgb(10, 140, 5)',    // 어두운 녹색
+                    'rgb(12, 180, 10)',   // 중간 녹색
+                    'rgb(50, 200, 50)',   // 밝은 녹색
+                    'rgb(100, 220, 100)', // 연한 녹색
+                    'rgb(150, 235, 150)'  // 매우 연한 녹색
+                ];
+                for (let i = 0; i < count; i++) {
+                    variations.push(greenShades[i] || greenShades[greenShades.length - 1]);
+                }
+            } else {
+                // 다른 색상은 기존 방식 사용
+                for (let i = 0; i < count; i++) {
+                    const factor = 1 + (i * 0.45);
+                    let newR = Math.min(255, Math.round(r * factor));
+                    let newG = Math.min(255, Math.round(g * factor));
+                    let newB = Math.min(255, Math.round(b * factor));
+                    
+                    const avg = (newR + newG + newB) / 3;
+                    const saturationFactor = 0.7;
+                    newR = Math.round(avg + (newR - avg) * saturationFactor);
+                    newG = Math.round(avg + (newG - avg) * saturationFactor);
+                    newB = Math.round(avg + (newB - avg) * saturationFactor);
+                    
+                    const brightness = (newR + newG + newB) / 3;
+                    if (brightness > 210) {
+                        const blendFactor = 0.2 + (i * 0.16);
+                        newR = Math.round(r + (255 - r) * blendFactor);
+                        newG = Math.round(g + (255 - g) * blendFactor);
+                        newB = Math.round(b + (255 - b) * blendFactor);
+                        
+                        const avgBright = (newR + newG + newB) / 3;
+                        newR = Math.round(avgBright + (newR - avgBright) * saturationFactor);
+                        newG = Math.round(avgBright + (newG - avgBright) * saturationFactor);
+                        newB = Math.round(avgBright + (newB - avgBright) * saturationFactor);
+                    }
+                    
+                    variations.push(`rgb(${newR}, ${newG}, ${newB})`);
+                }
+            }
+            
+            return variations;
+        }
+
+        // 로봇 수 (6대)
+        const robotCount = 6;
+
+        // 공통 차트 옵션
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        usePointStyle: false,
+                        boxWidth: 15,
+                        boxHeight: 15,
+                        font: {
+                            family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                        }
+                    }
+                }
+            }
+        };
+
+        // 로봇 목록 (내림차순 정렬용) - 6대
+        const robotNames = ['청소로봇-C01', '청소로봇-C02', '청소로봇-B01', '청소로봇-B02', 
+                            '청소로봇-A01', '청소로봇-A02'];
+
+        // 동적 축 범위 계산 함수
+        function calculateDynamicScale(data) {
+            const max = Math.max(...data);
+            return {
+                min: 0,
+                max: max + 1,
+                ticks: {
+                    stepSize: Math.max(1, Math.ceil((max + 1) / 10))
+                }
+            };
+        }
+
+        // 일자별 작업 건수 패턴 차트
+        const weeklyTaskCountCtx = document.getElementById('weeklyTaskCountChart').getContext('2d');
+        
+        // 요일 계산 (2024년 11월 1일은 금요일)
+        const dayOfWeek = ['금', '토', '일', '월', '화', '수', '목'];
+        const dateLabels = Array.from({length: 30}, (_, i) => {
+            const day = i + 1;
+            const dow = dayOfWeek[i % 7];
+            return `${day}일 (${dow})`;
+        });
+        
+        // 각 로봇별 일자별 작업 건수 데이터 (30일)
+        const robotMonthlyData = {
+            '청소로봇-A01': Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 4),
+            '청소로봇-A02': Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 4),
+            '청소로봇-B01': Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 5),
+            '청소로봇-B02': Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 5),
+            '청소로봇-C01': Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 5),
+            '청소로봇-C02': Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 5)
+        };
+        
+        const robotMonthlyDatasets = Object.keys(robotMonthlyData).map(robotName => ({
+            label: robotName,
+            data: robotMonthlyData[robotName],
+            backgroundColor: robotColorMap[robotName],
+            borderWidth: 0
+        }));
+        
+        const monthlyScale = calculateDynamicScale(Object.values(robotMonthlyData).flat());
+        
+        // 누적 합계 계산
+        const monthlyTotalData = dateLabels.map((_, dayIndex) => {
+            return Object.values(robotMonthlyData).reduce((sum, robotData) => sum + robotData[dayIndex], 0);
+        });
+        const monthlyTotalScale = calculateDynamicScale(monthlyTotalData);
+        
+        new Chart(weeklyTaskCountCtx, {
+            type: 'bar',
+            data: {
+                labels: dateLabels,
+                datasets: robotMonthlyDatasets
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            font: {
+                                size: 10
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                        min: monthlyTotalScale.min,
+                        max: monthlyTotalScale.max,
+                        title: { display: true, text: '작업 건수 (누적)' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: monthlyTotalScale.ticks
+                    }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            usePointStyle: false,
+                            boxWidth: 15,
+                            boxHeight: 15,
+                            font: {
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            }
+        });
+
+        // 청소 면적 비교 차트
+        const plannedAreaData = [3000, 2900, 2800, 2700, 2600, 2550];
+        const realAreaData = [2850, 2750, 2680, 2550, 2450, 2380];
+        const cleaningAreaCtx = document.getElementById('cleaningAreaChart').getContext('2d');
+        const areaScale = calculateDynamicScale([...realAreaData, ...plannedAreaData]);
+        
+        new Chart(cleaningAreaCtx, {
+            type: 'bar',
+            data: {
+                labels: robotNames,
+                datasets: [
+                    {
+                        label: '실 청소 면적 합계 (m²)',
+                        data: realAreaData,
+                        backgroundColor: metricColors.realArea,
+                        barPercentage: 0.8
+                    },
+                    {
+                        label: '계획 청소 면적 합계 (m²)',
+                        data: plannedAreaData,
+                        backgroundColor: metricColors.plannedArea,
+                        barPercentage: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            usePointStyle: false,
+                            boxWidth: 15,
+                            boxHeight: 15,
+                            font: {
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        min: areaScale.min,
+                        max: areaScale.max,
+                        title: { display: true, text: '면적 (m²)' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: areaScale.ticks
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 청소 시간 비교 차트
+        const cleaningTimeSumData = [28.17, 27.50, 26.25, 25.33, 24.50, 23.75];
+        const cleaningTimeCtx = document.getElementById('cleaningTimeChart').getContext('2d');
+        const timeSumScale = calculateDynamicScale(cleaningTimeSumData);
+        
+        new Chart(cleaningTimeCtx, {
+            type: 'bar',
+            data: {
+                labels: robotNames,
+                datasets: [
+                    {
+                        label: '청소 시간 합계 (시간)',
+                        data: cleaningTimeSumData,
+                        backgroundColor: metricColors.cleaningTime
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        display: false
+                    }
+                },
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        min: timeSumScale.min,
+                        max: timeSumScale.max,
+                        title: { display: true, text: '청소 시간 합계 (시간)' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: timeSumScale.ticks
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 청소 효율 비교 차트
+        const cleaningEfficiencyData = [101.3, 101.0, 102.0, 101.5, 100.5, 101.2];
+        const cleaningEfficiencyCtx = document.getElementById('cleaningEfficiencyChart').getContext('2d');
+        const efficiencyScale = calculateDynamicScale(cleaningEfficiencyData);
+        
+        new Chart(cleaningEfficiencyCtx, {
+            type: 'bar',
+            data: {
+                labels: robotNames,
+                datasets: [
+                    {
+                        label: '청소 효율 (m²/시간)',
+                        data: cleaningEfficiencyData,
+                        backgroundColor: metricColors.efficiency
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        display: false
+                    }
+                },
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        min: efficiencyScale.min,
+                        max: efficiencyScale.max,
+                        title: { display: true, text: '청소 효율 (m²/시간)' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: efficiencyScale.ticks
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 시간대별 로봇 작업 분포 차트 (스택 세로형)
+        const hourlyWorkCtx = document.getElementById('hourlyWorkDistributionChart').getContext('2d');
+        const hourlyLabels = ['0시', '1시', '2시', '3시', '4시', '5시', '6시', '7시', '8시', '9시', '10시', '11시',
+                              '12시', '13시', '14시', '15시', '16시', '17시', '18시', '19시', '20시', '21시', '22시', '23시'];
+        // 각 시간대별로 6대 로봇의 작업 건수를 합산하여 스택으로 표시
+        const hourlyRobot1Data = [12, 8, 5, 3, 2, 4, 15, 18, 20, 22, 18, 16, 14, 12, 10, 8, 6, 5, 4, 3, 3, 2, 2, 1];
+        const hourlyRobot2Data = [10, 7, 4, 2, 3, 5, 14, 17, 19, 21, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 2, 1, 1, 1];
+        const hourlyRobot3Data = [15, 10, 6, 4, 3, 6, 18, 20, 22, 24, 20, 18, 16, 14, 12, 10, 8, 6, 5, 4, 3, 2, 2, 1];
+        const hourlyRobot4Data = [8, 6, 3, 2, 2, 3, 12, 15, 17, 19, 15, 13, 11, 9, 7, 6, 4, 3, 2, 2, 1, 1, 1, 0];
+        const hourlyRobot5Data = [11, 9, 5, 3, 3, 5, 16, 19, 21, 23, 19, 17, 15, 13, 11, 9, 7, 5, 4, 3, 2, 2, 1, 1];
+        const hourlyRobot6Data = [9, 7, 4, 2, 2, 4, 13, 16, 18, 20, 16, 14, 12, 10, 8, 6, 5, 4, 3, 2, 2, 1, 1, 0];
+        const hourlyTotalData = hourlyRobot1Data.map((val, idx) => 
+            val + hourlyRobot2Data[idx] + hourlyRobot3Data[idx] + 
+            hourlyRobot4Data[idx] + hourlyRobot5Data[idx] + hourlyRobot6Data[idx]
+        );
+        const hourlyScale = calculateDynamicScale(hourlyTotalData);
+        
+        new Chart(hourlyWorkCtx, {
+            type: 'bar',
+            data: {
+                labels: hourlyLabels,
+                datasets: [
+                    {
+                        label: '청소로봇-A01',
+                        data: hourlyRobot1Data,
+                        backgroundColor: robotColorMap['청소로봇-A01'],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '청소로봇-A02',
+                        data: hourlyRobot2Data,
+                        backgroundColor: robotColorMap['청소로봇-A02'],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '청소로봇-B01',
+                        data: hourlyRobot3Data,
+                        backgroundColor: robotColorMap['청소로봇-B01'],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '청소로봇-B02',
+                        data: hourlyRobot4Data,
+                        backgroundColor: robotColorMap['청소로봇-B02'],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '청소로봇-C01',
+                        data: hourlyRobot5Data,
+                        backgroundColor: robotColorMap['청소로봇-C01'],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '청소로봇-C02',
+                        data: hourlyRobot6Data,
+                        backgroundColor: robotColorMap['청소로봇-C02'],
+                        borderWidth: 0
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                        min: hourlyScale.min,
+                        max: hourlyScale.max,
+                        title: { display: true, text: '작업 건수' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: hourlyScale.ticks
+                    }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            }
+        });
+
+        // 일자별 청소 성과 차트 (청소로봇-A01 예시)
+        const dailyCleaningCtx = document.getElementById('dailyCleaningChart').getContext('2d');
+        // 요일 포함 라벨 생성 (2024년 11월 1일은 금요일)
+        const dayOfWeekShort = ['금', '토', '일', '월', '화', '수', '목'];
+        const days = Array.from({length: 30}, (_, i) => {
+            const day = i + 1;
+            const dow = dayOfWeekShort[i % 7];
+            return `${day}일 (${dow})`;
+        });
+        const dailyPlannedData = Array(30).fill(0).map(() => Math.floor(Math.random() * 20) + 90);
+        const dailyRealData = dailyPlannedData.map(planned => Math.floor(Math.random() * (planned - 60)) + 60);
+        new Chart(dailyCleaningCtx, {
+            type: 'bar',
+            data: {
+                labels: days,
+                datasets: [
+                    {
+                        label: '실 청소 면적 (m²)',
+                        data: dailyRealData,
+                        backgroundColor: metricColors.realArea,
+                        yAxisID: 'y',
+                        order: 2,
+                        barPercentage: 0.8
+                    },
+                    {
+                        label: '계획 청소 면적 (m²)',
+                        data: dailyPlannedData,
+                        backgroundColor: metricColors.plannedArea,
+                        yAxisID: 'y',
+                        order: 2,
+                        barPercentage: 0.4
+                    },
+                    {
+                        label: '가동 시간 (시간)',
+                        data: Array(30).fill(0).map(() => Math.random() * 2 + 0.5),
+                        type: 'line',
+                        borderColor: secondaryMain,
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        yAxisID: 'y1',
+                        order: 0
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            usePointStyle: false,
+                            boxWidth: 15,
+                            boxHeight: 15,
+                            font: {
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            generateLabels: function(chart) {
+                                const datasets = chart.data.datasets;
+                                // 범례 순서를 명시적으로 지정: 실 청소 면적 → 계획 청소 면적 → 가동 시간
+                                const legendOrder = [0, 1, 2]; // datasets의 인덱스 순서
+                                
+                                return legendOrder.map(index => {
+                                    const dataset = datasets[index];
+                                    return {
+                                        text: dataset.label,
+                                        fillStyle: dataset.backgroundColor || dataset.borderColor,
+                                        strokeStyle: dataset.borderColor,
+                                        lineWidth: dataset.borderWidth || 0,
+                                        hidden: !chart.isDatasetVisible(index),
+                                        datasetIndex: index
+                                    };
+                                });
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            font: {
+                                size: 10
+                            }
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        beginAtZero: true,
+                        title: { display: true, text: '면적 (m²)' },
+                        grid: { color: '#f0f0f0' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        beginAtZero: true,
+                        title: { display: true, text: '가동 시간 (시간)' },
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+
+        // 작업별 상세 성과 데이터 (10개 작업)
+        const taskDetailData = [
+            { name: '전체 청소', count: 85, realArea: 95.5, planArea: 100.0, time: 58, efficiency: 98.8 },
+            { name: '부분 청소', count: 42, realArea: 48.2, planArea: 50.0, time: 32, efficiency: 90.4 },
+            { name: '스팟 청소', count: 18, realArea: 12.5, planArea: 15.0, time: 8, efficiency: 93.8 },
+            { name: '긴급 청소', count: 12, realArea: 35.8, planArea: 40.0, time: 22, efficiency: 97.6 },
+            { name: '야간 청소', count: 8, realArea: 62.3, planArea: 65.0, time: 38, efficiency: 98.3 },
+            { name: '엣지 청소', count: 6, realArea: 28.5, planArea: 30.0, time: 18, efficiency: 95.0 },
+            { name: '코너 청소', count: 5, realArea: 15.2, planArea: 18.0, time: 12, efficiency: 76.0 },
+            { name: '특별 청소', count: 3, realArea: 42.0, planArea: 45.0, time: 28, efficiency: 90.0 },
+            { name: '진공 청소', count: 2, realArea: 52.3, planArea: 55.0, time: 35, efficiency: 89.6 },
+            { name: '기타 청소', count: 1, realArea: 10.5, planArea: 12.0, time: 8, efficiency: 78.8 }
+        ];
+        
+        // 파이차트용 색상 (10개)
+        const taskPieColors = [
+            robotColorMap['청소로봇-A01'],
+            robotColorMap['청소로봇-A02'],
+            robotColorMap['청소로봇-B01'],
+            robotColorMap['청소로봇-B02'],
+            robotColorMap['청소로봇-C01'],
+            robotColorMap['청소로봇-C02'],
+            '#4a90e2',
+            '#00b894',
+            '#6c5ce7',
+            '#a29bfe'
+        ];
+        
+        // 파이차트 생성
+        const taskPieCtx = document.getElementById('taskPieChart').getContext('2d');
+        new Chart(taskPieCtx, {
+            type: 'pie',
+            data: {
+                labels: taskDetailData.map(t => t.name),
+                datasets: [{
+                    data: taskDetailData.map(t => t.count),
+                    backgroundColor: taskPieColors,
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 10,
+                            usePointStyle: true,
+                            boxWidth: 8,
+                            boxHeight: 8,
+                            font: {
+                                size: 11,
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${label}: ${value}건 (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 테이블 페이지네이션
+        let currentTaskPage = 1;
+        const itemsPerPage = 5;
+        const totalPages = Math.ceil(taskDetailData.length / itemsPerPage);
+        
+        function renderTaskTable() {
+            const tbody = document.getElementById('taskTableBody');
+            const start = (currentTaskPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageData = taskDetailData.slice(start, end);
+            
+            tbody.innerHTML = pageData.map(task => `
+                <tr>
+                    <td>${task.name}</td>
+                    <td>${task.count}</td>
+                    <td>${task.realArea}</td>
+                    <td>${task.planArea}</td>
+                    <td>${task.time}</td>
+                    <td>${task.efficiency}</td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('taskPageInfo').textContent = `${currentTaskPage} / ${totalPages}`;
+            document.getElementById('taskPrevBtn').disabled = currentTaskPage === 1;
+            document.getElementById('taskNextBtn').disabled = currentTaskPage === totalPages;
+            
+            // 비활성 버튼 스타일
+            document.getElementById('taskPrevBtn').style.opacity = currentTaskPage === 1 ? '0.5' : '1';
+            document.getElementById('taskNextBtn').style.opacity = currentTaskPage === totalPages ? '0.5' : '1';
+            document.getElementById('taskPrevBtn').style.cursor = currentTaskPage === 1 ? 'not-allowed' : 'pointer';
+            document.getElementById('taskNextBtn').style.cursor = currentTaskPage === totalPages ? 'not-allowed' : 'pointer';
+        }
+        
+        function changeTaskPage(direction) {
+            const newPage = currentTaskPage + direction;
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentTaskPage = newPage;
+                renderTaskTable();
+            }
+        }
+        
+        // 초기 테이블 렌더링
+        renderTaskTable();
+
+        // 일자별 작업 수행 분포 차트 (누적 막대)
+        const dailyTaskFullData = Array(30).fill(0).map(() => Math.floor(Math.random() * 5) + 2);
+        const dailyTaskPartData = Array(30).fill(0).map(() => Math.floor(Math.random() * 3) + 1);
+        const dailyTaskSpotData = Array(30).fill(0).map(() => Math.floor(Math.random() * 2));
+        const dailyTaskEmergencyData = Array(30).fill(0).map(() => Math.floor(Math.random() * 2));
+        const dailyTaskNightData = Array(30).fill(0).map(() => Math.floor(Math.random() * 1));
+        const dailyTaskTotalData = dailyTaskFullData.map((val, idx) => 
+            val + dailyTaskPartData[idx] + dailyTaskSpotData[idx] + dailyTaskEmergencyData[idx] + dailyTaskNightData[idx]
+        );
+        
+        // 스케줄 여부 데이터 (전체의 60~80%를 스케줄 작업으로 설정)
+        const dailyTaskScheduledData = dailyTaskTotalData.map(total => 
+            Math.floor(total * (0.6 + Math.random() * 0.2))
+        );
+        const dailyTaskUnscheduledData = dailyTaskTotalData.map((total, idx) => 
+            total - dailyTaskScheduledData[idx]
+        );
+        
+        const dailyTaskScale = calculateDynamicScale(dailyTaskTotalData);
+        
+        // 작업 유형별 색상 (로봇 색상 사용 - 5개 작업 유형)
+        const dailyTaskTypeColors = [
+            robotColorMap['청소로봇-A01'],
+            robotColorMap['청소로봇-A02'],
+            robotColorMap['청소로봇-B01'],
+            robotColorMap['청소로봇-B02'],
+            robotColorMap['청소로봇-C01']
+        ];
+        
+        // 스케줄 여부 색상
+        const scheduleColors = {
+            scheduled: '#26254f',      // 스케줄 작업 (진한 남색)
+            unscheduled: '#95a5a6'     // 비스케줄 작업 (회색)
+        };
+        
+        const dailyTaskCtx = document.getElementById('dailyTaskDistributionChart').getContext('2d');
+        let dailyTaskChart = new Chart(dailyTaskCtx, {
+            type: 'bar',
+            data: {
+                labels: days,
+                datasets: [
+                    {
+                        label: '전체 작업 건수',
+                        data: dailyTaskTotalData,
+                        backgroundColor: primaryColor,
+                        borderWidth: 0
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    x: {
+                        stacked: false,
+                        grid: { display: false },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            font: {
+                                size: 10
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        stacked: false,
+                        min: dailyTaskScale.min,
+                        max: dailyTaskScale.max,
+                        title: { display: true, text: '작업 건수' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: dailyTaskScale.ticks
+                    }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            }
+        });
+
+        // 시간대별 작업 수행 분포 차트 (누적 막대)
+        const hours24 = Array.from({length: 24}, (_, i) => `${i}시`);
+        const hourlyTaskFullData = Array(24).fill(0).map(() => Math.floor(Math.random() * 10) + 5);
+        const hourlyTaskPartData = Array(24).fill(0).map(() => Math.floor(Math.random() * 5) + 2);
+        const hourlyTaskSpotData = Array(24).fill(0).map(() => Math.floor(Math.random() * 3) + 1);
+        const hourlyTaskEmergencyData = Array(24).fill(0).map(() => Math.floor(Math.random() * 3));
+        const hourlyTaskNightData = Array(24).fill(0).map(() => Math.floor(Math.random() * 2));
+        const hourlyTaskTotalData = hourlyTaskFullData.map((val, idx) => 
+            val + hourlyTaskPartData[idx] + hourlyTaskSpotData[idx] + hourlyTaskEmergencyData[idx] + hourlyTaskNightData[idx]
+        );
+        const hourlyTaskScale = calculateDynamicScale(hourlyTaskTotalData);
+        
+        // 작업 유형별 색상 (로봇 색상 사용 - 5개 작업 유형)
+        const hourlyTaskTypeColors = [
+            robotColorMap['청소로봇-A01'],
+            robotColorMap['청소로봇-A02'],
+            robotColorMap['청소로봇-B01'],
+            robotColorMap['청소로봇-B02'],
+            robotColorMap['청소로봇-C01']
+        ];
+        
+        const hourlyTaskCtx = document.getElementById('hourlyTaskDistributionChart').getContext('2d');
+        new Chart(hourlyTaskCtx, {
+            type: 'bar',
+            data: {
+                labels: hours24,
+                datasets: [
+                    {
+                        label: '전체 청소',
+                        data: hourlyTaskFullData,
+                        backgroundColor: hourlyTaskTypeColors[0],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '부분 청소',
+                        data: hourlyTaskPartData,
+                        backgroundColor: hourlyTaskTypeColors[1],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '스팟 청소',
+                        data: hourlyTaskSpotData,
+                        backgroundColor: hourlyTaskTypeColors[2],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '긴급 청소',
+                        data: hourlyTaskEmergencyData,
+                        backgroundColor: hourlyTaskTypeColors[3],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '야간 청소',
+                        data: hourlyTaskNightData,
+                        backgroundColor: hourlyTaskTypeColors[4],
+                        borderWidth: 0
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                        min: hourlyTaskScale.min,
+                        max: hourlyTaskScale.max,
+                        title: { display: true, text: '작업 건수' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: hourlyTaskScale.ticks
+                    }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            }
+        });
+
+        // 작업별 평균 면적 비교 차트
+        const taskPlannedAreaData = [100.0, 50.0, 15.0, 40.0, 65.0];
+        const taskRealAreaData = [95.5, 48.2, 12.5, 35.8, 62.3];
+        const taskAreaScale = calculateDynamicScale([...taskRealAreaData, ...taskPlannedAreaData]);
+        const taskAreaCtx = document.getElementById('taskAreaComparisonChart').getContext('2d');
+        
+        // 작업 수 (5개)
+        const taskCount = 5;
+        
+        new Chart(taskAreaCtx, {
+            type: 'bar',
+            data: {
+                labels: ['전체 청소', '부분 청소', '스팟 청소', '엣지 청소', '진공 청소'],
+                datasets: [
+                    {
+                        label: '평균 실 청소 면적 (m²)',
+                        data: taskRealAreaData,
+                        backgroundColor: metricColors.realArea,
+                        barPercentage: 0.8
+                    },
+                    {
+                        label: '평균 계획 면적 (m²)',
+                        data: taskPlannedAreaData,
+                        backgroundColor: metricColors.plannedArea,
+                        barPercentage: 0.4
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            usePointStyle: false,
+                            boxWidth: 15,
+                            boxHeight: 15,
+                            font: {
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            }
+                        }
+                    }
+                },
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        min: taskAreaScale.min,
+                        max: taskAreaScale.max,
+                        title: { display: true, text: '면적 (m²)' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: taskAreaScale.ticks
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 작업별 평균 청소 시간 차트
+        const taskTimeData = [58, 32, 8, 22, 38];
+        const taskTimeScale = calculateDynamicScale(taskTimeData);
+        const taskTimeCtx = document.getElementById('taskTimeChart').getContext('2d');
+        
+        new Chart(taskTimeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['전체 청소', '부분 청소', '스팟 청소', '엣지 청소', '진공 청소'],
+                datasets: [{
+                    label: '평균 청소 시간 (분)',
+                    data: taskTimeData,
+                    backgroundColor: metricColors.cleaningTime
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        display: false
+                    }
+                },
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        min: taskTimeScale.min,
+                        max: taskTimeScale.max,
+                        title: { display: true, text: '평균 청소 시간 (분)' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: taskTimeScale.ticks
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 작업별 평균 청소 효율 차트
+        const taskEfficiencyData = [98.8, 90.4, 93.8, 97.6, 98.3];
+        const taskEfficiencyScale = calculateDynamicScale(taskEfficiencyData);
+        const taskEfficiencyCtx = document.getElementById('taskEfficiencyChart').getContext('2d');
+        
+        new Chart(taskEfficiencyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['전체 청소', '부분 청소', '스팟 청소', '엣지 청소', '진공 청소'],
+                datasets: [{
+                    label: '평균 청소 효율 (m²/시간)',
+                    data: taskEfficiencyData,
+                    backgroundColor: metricColors.efficiency
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    legend: {
+                        display: false
+                    }
+                },
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        min: taskEfficiencyScale.min,
+                        max: taskEfficiencyScale.max,
+                        title: { display: true, text: '평균 청소 효율 (m²/시간)' },
+                        grid: { color: '#f0f0f0' },
+                        ticks: taskEfficiencyScale.ticks
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 작업별 종료 유형 비율 파이 차트
+        const completionTypeLabels = ['정상 종료', '사용자 임의 종료', '작업 시작 실패', '다른 작업으로 대체', '기타 오류로 종료'];
+        const completionTypeData = [72, 15, 8, 3, 2];
+        // 종료 유형별 색상 (로봇 색상 사용)
+        const completionTypeColors = [
+            robotColorMap['청소로봇-A01'],
+            robotColorMap['청소로봇-A02'],
+            robotColorMap['청소로봇-B01'],
+            robotColorMap['청소로봇-B02'],
+            robotColorMap['청소로봇-C01']
+        ];
+
+        // 작업 종료 원인별 성과 데이터 (8개)
+        const completionReasonData = [
+            { reason: '정상 완료', count: 342, realArea: 98.5, time: 55 },
+            { reason: '사용자 임의 종료', count: 45, realArea: 65.2, time: 38 },
+            { reason: '배터리 부족', count: 28, realArea: 82.3, time: 48 },
+            { reason: '긴급 정지', count: 15, realArea: 45.8, time: 25 },
+            { reason: '장애물 감지', count: 12, realArea: 52.1, time: 30 },
+            { reason: '오류 발생', count: 8, realArea: 38.5, time: 22 },
+            { reason: '통신 오류', count: 5, realArea: 28.2, time: 15 },
+            { reason: '기타', count: 3, realArea: 22.8, time: 12 }
+        ];
+
+        // 작업 종료 원인별 성과 페이지네이션
+        let currentCompletionPage = 1;
+        const completionItemsPerPage = 5;
+        const totalCompletionPages = Math.ceil(completionReasonData.length / completionItemsPerPage);
+
+        function renderCompletionReasonTable() {
+            const startIdx = (currentCompletionPage - 1) * completionItemsPerPage;
+            const endIdx = startIdx + completionItemsPerPage;
+            const pageData = completionReasonData.slice(startIdx, endIdx);
+            
+            const tableBody = document.getElementById('completionReasonTableBody');
+            tableBody.innerHTML = pageData.map(item => `
+                <tr>
+                    <td>${item.reason}</td>
+                    <td>${item.count}</td>
+                    <td>${item.realArea}</td>
+                    <td>${item.time}</td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('completionPageInfo').textContent = `${currentCompletionPage} / ${totalCompletionPages}`;
+            document.getElementById('completionPrevBtn').disabled = currentCompletionPage === 1;
+            document.getElementById('completionNextBtn').disabled = currentCompletionPage === totalCompletionPages;
+        }
+
+        function changeCompletionPage(direction) {
+            const newPage = currentCompletionPage + direction;
+            if (newPage >= 1 && newPage <= totalCompletionPages) {
+                currentCompletionPage = newPage;
+                renderCompletionReasonTable();
+            }
+        }
+
+        // 각 종료 유형별 오류 데이터 (최대 5개 이상으로 확장)
+        const errorDataByType = {
+            '사용자 임의 종료': [
+                { type: '오수통 비어짐', count: 8 },
+                { type: '센서 오작동', count: 5 },
+                { type: '네트워크 연결 끊김', count: 3 },
+                { type: '물탱크 부족', count: 2 },
+                { type: '브러시 걸림', count: 2 },
+                { type: '휠 고장', count: 1 }
+            ],
+            '정상 완료': [
+                { type: '오류 없음', count: 0 }
+            ],
+            '배터리 부족': [
+                { type: '배터리 전압 저하', count: 12 },
+                { type: '충전 실패', count: 5 },
+                { type: '배터리 과열', count: 3 },
+                { type: '충전 포트 오류', count: 2 },
+                { type: '배터리 셀 불량', count: 1 }
+            ],
+            '긴급 정지': [
+                { type: '비상 버튼 작동', count: 8 },
+                { type: '충돌 감지', count: 4 },
+                { type: '급격한 경사 감지', count: 3 },
+                { type: '낙하 위험 감지', count: 2 },
+                { type: '시스템 과부하', count: 1 }
+            ],
+            '장애물 감지': [
+                { type: '고정 장애물', count: 6 },
+                { type: '이동 장애물', count: 4 },
+                { type: '미확인 장애물', count: 3 },
+                { type: '센서 범위 초과', count: 2 },
+                { type: '복합 장애물', count: 1 },
+                { type: '투명 장애물', count: 1 }
+            ]
+        };
+
+        // 오류 테이블 페이지네이션
+        let currentErrorPage = 1;
+        let currentErrorType = '사용자 임의 종료';
+        const errorItemsPerPage = 5;
+
+        function updateErrorTable() {
+            const selector = document.getElementById('completionTypeSelector');
+            const selectedType = selector.value;
+            currentErrorType = selectedType;
+            currentErrorPage = 1; // 종료 유형 변경 시 첫 페이지로 리셋
+            renderErrorTable();
+        }
+
+        function renderErrorTable() {
+            const tableBody = document.getElementById('errorDetailTableBody');
+            const errors = errorDataByType[currentErrorType] || [];
+            
+            if (errors.length === 0 || (errors.length === 1 && errors[0].type === '오류 없음')) {
+                tableBody.innerHTML = '<tr><td colspan="2" style="text-align: center; color: #6c757d; font-style: italic;">오류 정보 없음</td></tr>';
+                document.getElementById('errorPageInfo').textContent = '1 / 1';
+                document.getElementById('errorPrevBtn').disabled = true;
+                document.getElementById('errorNextBtn').disabled = true;
+                return;
+            }
+
+            const totalPages = Math.ceil(errors.length / errorItemsPerPage);
+            const startIdx = (currentErrorPage - 1) * errorItemsPerPage;
+            const endIdx = startIdx + errorItemsPerPage;
+            const pageData = errors.slice(startIdx, endIdx);
+            
+            tableBody.innerHTML = pageData.map(error => 
+                `<tr><td>${error.type}</td><td>${error.count}</td></tr>`
+            ).join('');
+            
+            document.getElementById('errorPageInfo').textContent = `${currentErrorPage} / ${totalPages}`;
+            document.getElementById('errorPrevBtn').disabled = currentErrorPage === 1;
+            document.getElementById('errorNextBtn').disabled = currentErrorPage === totalPages;
+        }
+
+        function changeErrorPage(direction) {
+            const errors = errorDataByType[currentErrorType] || [];
+            const totalPages = Math.ceil(errors.length / errorItemsPerPage);
+            const newPage = currentErrorPage + direction;
+            
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentErrorPage = newPage;
+                renderErrorTable();
+            }
+        }
+
+        // 초기 테이블 렌더링
+        renderCompletionReasonTable();
+        renderErrorTable();
+
+        const taskCompletionTypeCtx = document.getElementById('taskCompletionTypeChart').getContext('2d');
+        const taskCompletionTypeChart = new Chart(taskCompletionTypeCtx, {
+            type: 'pie',
+            data: {
+                labels: completionTypeLabels,
+                datasets: [{
+                    data: completionTypeData,
+                    backgroundColor: completionTypeColors,
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: false,
+                            boxWidth: 15,
+                            boxHeight: 15
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${label}: ${value}건 (${percentage}%)`;
+                            }
+                        }
+                    }
+                },
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const clickedType = completionTypeLabels[index];
+                        // 셀렉터의 값을 변경하고 오류 테이블 업데이트
+                        const selector = document.getElementById('completionTypeSelector');
+                        // 셀렉터에 해당 옵션이 있는지 확인
+                        const options = Array.from(selector.options).map(opt => opt.value);
+                        if (options.includes(clickedType)) {
+                            selector.value = clickedType;
+                            currentErrorType = clickedType;
+                            currentErrorPage = 1;
+                            renderErrorTable();
+                        }
+                    }
+                }
+            }
+        });
+
+        // 일자별 작업 수행 분포 토글 함수
+        function toggleDailyTaskView(viewType) {
+            const typeBtn = document.getElementById('dailyTaskTypeBtn');
+            const scheduleBtn = document.getElementById('dailyTaskScheduleBtn');
+            const totalBtn = document.getElementById('dailyTaskTotalBtn');
+            
+            // 모든 버튼 초기화
+            typeBtn.style.background = 'transparent';
+            typeBtn.style.color = '#495057';
+            scheduleBtn.style.background = 'transparent';
+            scheduleBtn.style.color = '#495057';
+            totalBtn.style.background = 'transparent';
+            totalBtn.style.color = '#495057';
+            
+            if (viewType === 'type') {
+                // 작업 유형별 보기
+                typeBtn.style.background = '#26254f';
+                typeBtn.style.color = 'white';
+                
+                dailyTaskChart.data.datasets = [
+                    {
+                        label: '전체 청소',
+                        data: dailyTaskFullData,
+                        backgroundColor: dailyTaskTypeColors[0],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '부분 청소',
+                        data: dailyTaskPartData,
+                        backgroundColor: dailyTaskTypeColors[1],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '스팟 청소',
+                        data: dailyTaskSpotData,
+                        backgroundColor: dailyTaskTypeColors[2],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '긴급 청소',
+                        data: dailyTaskEmergencyData,
+                        backgroundColor: dailyTaskTypeColors[3],
+                        borderWidth: 0
+                    },
+                    {
+                        label: '야간 청소',
+                        data: dailyTaskNightData,
+                        backgroundColor: dailyTaskTypeColors[4],
+                        borderWidth: 0
+                    }
+                ];
+                dailyTaskChart.options.scales.x.stacked = true;
+                dailyTaskChart.options.scales.y.stacked = true;
+                dailyTaskChart.options.plugins.legend.display = true;
+            } else if (viewType === 'schedule') {
+                // 스케줄 여부 보기
+                scheduleBtn.style.background = '#26254f';
+                scheduleBtn.style.color = 'white';
+                
+                dailyTaskChart.data.datasets = [
+                    {
+                        label: '스케줄 작업',
+                        data: dailyTaskScheduledData,
+                        backgroundColor: scheduleColors.scheduled,
+                        borderWidth: 0
+                    },
+                    {
+                        label: '비스케줄 작업',
+                        data: dailyTaskUnscheduledData,
+                        backgroundColor: scheduleColors.unscheduled,
+                        borderWidth: 0
+                    }
+                ];
+                dailyTaskChart.options.scales.x.stacked = true;
+                dailyTaskChart.options.scales.y.stacked = true;
+                dailyTaskChart.options.plugins.legend.display = true;
+            } else {
+                // 전체 합계 보기
+                totalBtn.style.background = '#26254f';
+                totalBtn.style.color = 'white';
+                
+                dailyTaskChart.data.datasets = [
+                    {
+                        label: '전체 작업 건수',
+                        data: dailyTaskTotalData,
+                        backgroundColor: primaryColor,
+                        borderWidth: 0
+                    }
+                ];
+                dailyTaskChart.options.scales.x.stacked = false;
+                dailyTaskChart.options.scales.y.stacked = false;
+                dailyTaskChart.options.plugins.legend.display = false;
+            }
+            
+            dailyTaskChart.update();
+        }
+    </script>
+</body>
+</html>
